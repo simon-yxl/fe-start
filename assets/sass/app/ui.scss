@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* 公共设置：变量，方法等 */
+@import "../core/setting.scss";
+/* 重置 */
+@import "../core/reset.scss";
+/* 公共方法 */
+@import "../core/base.scss";
+
+/* @if 需要字体图标 */
+@import "../core/iconfont.scss";
+/* @end 需要字体图标 */
+
+/* 按钮 */
+@import "../module/btn.scss";

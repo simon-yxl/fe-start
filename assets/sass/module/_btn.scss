@@ -1,0 +1,161 @@
+@charset "UTF-8";
+//按钮控件
+$btn-text:                     $c-font-1;
+$btn-base:                     $c-white-1;
+$btn-border:                   $c-line-1;
+$btn-text-deep:                $c-font-2;
+$btn-base-deep:                $c-line-1;
+$btn-border-deep:              $c-line-1;
+$btn-text-primary:             $c-blue-1;
+$btn-base-primary:             $c-blue-1;
+$btn-border-primary:           $c-blue-1;
+$btn-border-light:             $c-blue-1;
+$btn-text-highlight:           $c-white-1;
+$btn-base-highlight:           $c-orange-1;
+$btn-border-highlight:         $c-orange-1;
+$btn-text-disabled:            $c-font-3;
+$btn-base-disabled:            $c-bg-2;
+$btn-border-disabled:          $c-line-1;
+$btn-icon-disabled:            $c-font-3;
+$btn-border-activate:          $c-blue-1;
+$btn-text-dropdown-prefix:     $c-font-2;
+$btn-text-loading:             $c-font-2;
+$btn-text-telphone:            $c-white-1;
+$btn-base-telphone:            $c-green-1;
+$btn-border-telphone:          $c-green-1;
+.btn{
+  display:inline-block;
+  position:relative;
+  // padding:ptrd(22px) ptrd(30px);
+  padding:ptrd(24px) ptrd(24px);
+  text-align:center;
+  @include border();
+  // border:1px solid $btn-border;
+  box-sizing: border-box;
+  font-size:$font-30;
+  border-radius:$radius-small;
+  color:$btn-text-deep;
+  background:$btn-base-deep;
+  &:visited{
+    color:$btn-text-deep;
+  }
+  &.simple{
+    border-color:$btn-border;
+    color:$btn-text;
+    background:$btn-base;
+    &.highlight{
+      color:$c-blue-1;
+      border-color:$c-blue-1;
+      background:none;
+      &:visited{
+        color:$c-blue-1;
+      }
+    }
+
+    &.disabled{
+      border-color:$c-font-4 !important;
+      color:$c-font-4 !important;
+      background:none !important;
+      &:visited{
+        color:$c-font-4 !important;
+      }
+    }
+  }
+  &:visited{
+    color:$btn-text;
+  }
+  &.large{
+    position:relative;
+    strong{
+      display:block;
+      margin:ptrd(24px) 0;
+    }
+    b{
+      display:block;
+      margin:ptrd(10px) 0;
+    }
+  }
+  &.bt{
+    border-color:rgba(0, 0, 0, 0);
+    border-top-color:$btn-border;
+  }
+  &.bl{
+    border-color:rgba(0, 0, 0, 0);
+    border-left-color:$btn-border;
+  }
+  &.br{
+    border-color:rgba(0, 0, 0, 0);
+    border-right-color:$btn-border;
+  }
+  &.bb{
+    border-color:rgba(0, 0, 0, 0);
+    border-bottom-color:$btn-border;
+  }
+  &.full{
+    display:block;
+  }
+  .icon-arrow-top,
+  .icon-arrow-bottom{
+    vertical-align: ptrd(2px);
+    margin-right:ptrd(10px);
+  }
+
+  &.highlight,
+  &.hightlight,
+  &.active{
+
+    color:$btn-text-highlight;
+    border-color:$c-blue-1;
+    background:$btn-base-primary;
+    &:visited{
+      color:$btn-text-highlight;
+    }
+  }
+
+  &.disabled{
+    border-color:$c-font-4 !important;
+    color:$c-white-1 !important;
+    background:$c-font-4 !important;
+    &:visited{
+      color:$c-white-1;
+    }
+  }
+
+  .icon-arrow-left,
+  .icon-arrow-right,
+  .icon-arrow-up,
+  .icon-arrow-down{
+    font-size:$font-24;
+    margin-left:ptrd(10px);
+  }
+
+  em{
+    display:block;
+    position:relative;
+    color:$c-font-3;
+    width:133%;
+    left:-16.5%;
+    transform:scale(.75);
+    margin-top:ptrd(4px);
+  }
+
+  &.loading{
+    text-align:center;
+    color:$c-font-3;
+    border:0;
+    padding:ptrd(30px);
+    .load{
+      vertical-align: ptrd(-2px);
+      margin-right:ptrd(10px);
+    }
+  }
+
+  &.btn-orange{
+    color:$c-white-1;
+    background:$c-orange-1;
+  }
+  &.btn-jd{
+    color:$c-white-1;
+    background:#f15353;
+  }
+}

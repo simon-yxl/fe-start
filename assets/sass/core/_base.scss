@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+//全局设定
+html{ background-color:$c-bg-1; font:16px/1 "STHeiti","Arial","sans-serif"; color: $c-font-1;}
+body{
+  color:$c-font-1;
+  // max-width:ptrd(750px);
+  margin:0 auto;
+  background:$c-bg-1;
+}
+
+.wrapper{
+  overflow-x:hidden;
+}
+//加载图标
+.load              { display: inline-block; width: ptrd(24px); height: ptrd(24px); background: url(//s.autoimg.cn/mass/v2/img/loading.gif) no-repeat; background-size: 100% 100%; opacity: 0.8;}
+//常用样式
+// .fn-mt             { margin-top: ptrd(20px);}
+// .fn-mb             { margin-bottom: ptrd(20px);}
+// .fn-mt-large       { margin-top: ptrd(12px);}
+// .fn-mb-large       { margin-bottom: ptrd(12px);}
+// .fn-mlr            { margin-left: ptrd(8px); margin-right: ptrd(8px);}
+// .fn-halfword       { margin-right: 0.5em;}
+// .fn-oneword        { margin-right: 1em;}
+.fn-hide           { display:none!important;}
+.fn-clear{
+  &::after{
+    content:"";
+    display:block;
+    height:0;
+    clear:both;
+    overflow:hidden;
+  }
+}
+
+/* 蒙层样式 */
+.mask{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0, 0, 0, .2);
+  opacity:0;
+  z-index:10000;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+}
+
+//颜色
+.red{
+  color:$c-red-1 !important;
+}
+.blue{
+  color:$c-blue-1 !important;
+}
+.orange{
+  color:$c-orange-1 !important;
+}
+
+//边框
+.bo-b{
+  @include border('bottom');
+}
+.bo-t{
+  @include border('top');
+}
+.bo-l{
+  @include border('left');
+}
+.bo-r{
+  @include border('right');
+}

@@ -1,0 +1,154 @@
+@charset "UTF-8";
+/*
+ * 公共方法
+ */
+ //px转换rem(兼容旧版本方法)
+ @function ptr($px, $default:16px) {
+   @return $px / $default * 1rem;
+ }
+
+ //px转换rem（设计稿实际尺寸）
+ @function ptrd($px, $default:16px) {
+   @return $px / $default / 2 * 1rem;
+ }
+
+ //清除浮动
+ // 闭合子元素的浮动
+ @mixin clearfix ($extend:true) {
+   @if $extend {
+     @extend %clearfix;
+   }
+   @else {
+     clear: both;
+     &:after {
+       content: "";
+       display: block;
+       width: 100%;
+       height: 0;
+       overflow: hidden;
+       clear: both;
+     }
+   }
+ }
+ %clearfix {
+   @include clearfix(false);
+ }
+ //截字
+ %ellipsis-basic {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+ }
+
+ /*
+  * @function 边线
+  * @param $direct 方向 default:空  example:top
+  * @param $color 颜色 default:$c-line-1
+  * @param $px 边线宽度 default:1px
+  * @param $style 边线类型 default:solid
+  * @example @include border('top') or @include border() or @include border('', $c-blue-1) 等
+  */
+  //兼容就业面中遗漏的border()方法
+  @function border($color:$c-line-1, $px:1px, $style:solid){
+    @return $px $style $color;
+  }
+ @mixin border($direct:'', $color:$c-line-1, $px:1px, $style:solid){
+   @if $direct != '' {
+     border-#{$direct}:$px $style $color;
+   }
+   @else {
+     border:$px $style $color;
+   }
+   box-sizing: border-box;
+  //  @media all and (-webkit-min-device-pixel-ratio : 3),
+  //         all and (-o-min-device-pixel-ratio: 3),
+  //         all and (min--moz-device-pixel-ratio: 3),
+  //         all and (min-device-pixel-ratio: 3) {
+  //           @if $direct {
+  //             border-#{$direct}:$px/2 $style $color;
+  //           }
+  //           @else {
+  //             border:$px/2 $style $color;
+  //           }
+  //           background:red;
+  //
+  //  }
+
+ }
+
+
+/*
+ * 公共变量
+ */
+// font相关
+//-----------------------------------------------------
+$baseFontSize: ptrd(28px) !default;
+$baseLineHeight: 1.5 !default;
+$baseFontFamily: "Helvetica Neue", Helvetica, Tahoma, sans-serif !default;
+$fontCn: "SimSun"; //宋体
+$fontYaHei: "Microsoft Yahei"; //微软雅黑
+$fontHeiTi: "SimHei"; //黑体
+// 路径相关
+//-----------------------------------------------------
+// $imgPath:             '../../images/' !default;
+$imgPath: '//www.autoimg.cn/2scimg/new_m/' !default;
+// $newImgPath:          '../../images/' !default;
+$newImgPath: '//www.autoimg.cn/2scimg/web/new_m/' !default;
+// 新的图片地址
+$imgSrc: '//x.autoimg.cn/2scimg/m/' !default;
+//圆角
+$radius: ptrd(16px);
+$radius-small: ptrd(8px);
+// 颜色
+$c-white-1: #ffffff;
+// 蓝色
+$c-blue-1: #378ded;
+// 橙色
+$c-orange-1: #ff6633;
+// 黄色
+$c-yellow-1: #ffa631;
+// 重要文字，大标题颜色
+$c-font-1: #222c38;
+// 常用字体颜色
+$c-font-2: #5c646c;
+// 辅助文字颜色
+$c-font-3: #969fa9;
+// 输入框文字颜色
+$c-font-4: #c5c8cf;
+// 正确提示
+$c-green-1: #36c06d;
+// 错误提示
+$c-red-1: #f84949;
+// 辅色
+// 重要图标
+$c-icon-1: #8e9ebc;
+// 背景色
+$c-bg-1: #f2f3f6;
+// 背景色浅色
+$c-bg-2: #f8f8f8;
+// APP描边
+$line-app: #e9e9e9;
+// H5描边
+$c-line-1: #eaedef;
+// 字号
+// 价格
+$font-48: ptrd(48px);
+// 一级标题
+$font-32: ptrd(32px);
+// 二级标题
+$font-30: ptrd(30px);
+// 正文常用字号
+$font-28: ptrd(28px);
+// 辅助信息，说明文字
+$font-24: ptrd(24px);
+//字号
+$font-36: ptrd(36px)!default;
+$font-40: ptrd(40px)!default;
+// 标签文字
+%font-20 {
+  display: block;
+  font-size: $font-24;
+  transform: scale(.83);
+  transform-origin: left bottom;
+}
+// @extend %font-24;

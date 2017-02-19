@@ -1,0 +1,7 @@
+{
+  "return" : 1,
+  "list" : [
+    {"value":"beijing", "des":"北京"},
+    {"value":"shanghai", "des":"上海"}
+  ]
+}

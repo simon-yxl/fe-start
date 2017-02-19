@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no,email=no" />
+	<!-- start 用于seo -->
+	<meta name="keywords" content="汽车之家 二手车之家 二手车 che168">
+	<meta name="description" content="二手车之家">
+	<!-- start 用于seo -->
+	<title>汽车之家专题</title>
+	<link rel="stylesheet" href="assets/css/topic.css" />
+	<!-- rem设置 -->
+	<script>
+		//做专题的时候可以打开注释，用于根据屏幕大小等比例缩放页面内容
+		(function() {
+			var changeRem = function() {
+				document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth / 20 + 'px';
+			};
+			changeRem();
+			var t;
+			window.addEventListener('resize', function() {
+				clearTimeout(t);
+				t = setTimeout(changeRem, 300);
+			}, false);
+			window.addEventListener('pageshow', function(e) {
+				if (e.persisted) {
+					clearTimeout(t);
+					t = setTimeout(changeRem, 300);
+				}
+			}, false);
+		}());
+	</script>
+</head>
+
+<body>
+	<div class="wrapper" id="index"> <time>{{ time }}</time>
+		<p>{{ explain | len(5) }}</p>
+		<ul id="form">
+			<li>
+				<t-input name="username" title="姓名：" placeholder="请输入正确的姓名" ref="username"></t-input>
+			</li>
+			<li>
+				<t-input name="contact" title="联系方式：" placeholder="请输入正确的手机号" ref="contact"></t-input>
+			</li>
+			<li>
+				<t-select title="所在城市：" :cnt=1 name="city" ref="city" geturl="assets/mock/city.json"></t-select>
+			</li>
+			<li>
+				<t-select title="意向车型：" :cnt=2 name="cartype" ref="cartype" geturl="assets/mock/cartype.json"></t-select>
+				<t-select title="意向车型：" :cnt=2 name="other" ref="other" :geturl="['assets/mock/cartype.json', 'assets/mock/carbrand.json']"></t-select>
+				<t-select title="年月日：" :cnt=3 name="date" ref="date"> <template slot="date-1" scope="props1">
+              <select :name="props1.sname" :class="props1.classname" >
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+              </select>
+            </template> <template slot="date-2" scope="props2">
+              <select :name="props2.sname" :class="props2.classname" >
+                <option>12</option>
+                <option>11</option>
+                <option>10</option>
+                <option>9</option>
+                <option>8</option>
+              </select>
+            </template> <template slot="date-3" scope="props3">
+              <select :name="props3.sname" :class="props3.classname" >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </template> </t-select>
+			</li>
+			<li class="form-submit"> <button @click="submit">提交</button> </li>
+		</ul>
+		<div id="description">
+			<p v-html="description"></p>
+		</div>
+		<div id="mount-point"></div>
+	</div>
+	<!-- start 弹窗，蒙板等额外的模块放在外面 -->
+	<!-- html内容 -->
+	<!-- end 弹窗，蒙板等额外的模块放在外面 -->
+	<!-- start 根据需求引入js文件 -->
+	<script src="assets/js/zepto-1.2.min.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script src="assets/js/vue-resource.min.js"></script>
+	<script src="assets/js/topic.js"></script>
+	<!-- end 根据需求引入js文件 -->
+	<script>
+		// 创建构造器
+		var Profile = Vue.extend({
+				template: '<p>{{ firstName | firstUpperCase }} {{lastName | firstUpperCase }} aka {{ alias | firstUpperCase }}</p>',
+				data: function() {
+					return {
+						firstName: 'Walter',
+						lastName: 'White',
+						alias: 'Heisenberg'
+					}
+				}
+			})
+			// 创建 Profile 实例，并挂载到一个元素上。
+		new Profile().$mount('#mount-point');
+	</script>
+</body>
+
+</html>

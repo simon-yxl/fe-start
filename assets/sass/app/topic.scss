@@ -1,0 +1,94 @@
+@charset "UTF-8";
+/* 公共设置：变量，方法等 */
+@import "../core/setting.scss";
+/* 重置 */
+@import "../core/reset.scss";
+/* 公共方法 */
+@import "../core/base.scss";
+
+/* @if 需要字体图标 */
+@import "../core/iconfont.scss";
+/* @end 需要字体图标 */
+
+/* 按钮 */
+@import "../module/btn.scss";
+body, .wrapper{
+  background:$c-white-1;
+}
+time{
+  display:block;
+  color:$c-yellow-1;
+  font-size:30px;
+  font-weight:bold;
+  text-align:center;
+  padding:40px;
+  background:$c-bg-1;
+}
+
+#form{
+  padding:10px;
+  // color:$c-white-1;
+  background:$c-bg-2;
+  li{
+    margin-bottom:10px;
+    .input-tt, .select-tt{
+      display:block;
+      margin-bottom:10px;
+    }
+    input{
+      width:100%;
+      padding:10px 5px;
+
+    }
+    input, select{
+      &.error{
+        color:$c-red-1;
+        border:1px solid $c-red-1;
+      }
+    }
+    .error-init{
+      display:block;
+      font-size:12px;
+      color:$c-red-1;
+      margin-top:5px;
+    }
+  }
+  .select-ct, .input-ct{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+
+  }
+  .select-ct{
+    .ct-s{
+        width:100%;
+        margin-right:10px;
+        &:last-child{
+          margin-right:0;
+        }
+    }
+    select{
+      width:100%;
+      background:$c-white-1;
+
+      padding:10px 5px;
+    }
+  }
+
+  button{
+    display:block;
+    -webkit-appearance:none;
+    border:0;
+    color:$c-white-1;
+    width:120px;
+    padding:10px;
+    margin:0 auto;
+
+    background:$c-blue-1;
+  }
+}
+
+#description{
+  padding:20px 10px;
+  background:#ccc;
+}
