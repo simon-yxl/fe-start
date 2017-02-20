@@ -1,7 +1,0 @@
-{
-  "return" : 1,
-  "list" : [
-    {"value":"aodi", "des":"奥迪", "url":"assets/mock/carbrand.json"},
-    {"value":"benci", "des":"奔驰"}
-  ]
-}
