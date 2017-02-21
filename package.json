@@ -2,7 +2,7 @@
   "name": "fe-start",
   "version": "1.0.0",
   "description": "前端工程化项目",
-  "banner": "/*!\n * copyright (c) 2016-2017, <%= pkg.name %> v<%= pkg.version %>\n * description: <%= pkg.description %>\n * build time: <%= new Date() %>\n */\n",
+  "banner": "/*!\n * copyright (c) 2016-2017, <%= pkg.author %> v<%= pkg.version %>\n * description: <%= pkg.description %>\n * build time: <%= new Date() %>\n */\n",
   "main": "gulpfile.js",
   "scripts": {
     "test": "gulp watch"
@@ -49,6 +49,7 @@
     "gulp.spritesmith": "^6.3.0",
     "merge-stream": "^1.0.1",
     "minimatch": "^3.0.3",
+    "path": "^0.12.7",
     "require-dir": "^0.3.1",
     "webpack-stream": "^3.2.0"
   }
