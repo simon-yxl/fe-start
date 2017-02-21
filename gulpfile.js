@@ -1,8 +1,4 @@
 var gulp          = require('gulp');
-var fs            = require('fs');
-var del           = require('del');
-
-var gutil       = require('gulp-util');
 var gulpSequence  = require('gulp-sequence');
 var browserSync   = require('browser-sync').create();
 var taskObj       = require('require-dir')('./tasks');
@@ -32,9 +28,6 @@ var paths = {
       src:'assets/images/sprites/*.png',
       css:'assets/sass/core/',
       image:'assets/images/'
-    },
-    backup: {                               // 本地源码备份路径
-        resources: ['**/*.*','!build/**/*.*','!backup/**/*.*','!form.html']
     }
 };
 
@@ -62,7 +55,7 @@ gulp.task('images', function(){
 
 // 清除构建任务
 gulp.task('clean',function(cb){
-    return del('./build/*', cb);
+    // return del('./build/*', cb);
 });
 
 // moveFile 移动文件
@@ -72,7 +65,7 @@ gulp.task('moveFiles',function(){
 
 // 发布任务
 gulp.task('build',function (cb){
-    return gulpSequence(['browserify','sass'],['compress'],['moveFiles'], cb);
+    // return gulpSequence(['browserify','sass'],['compress'],['moveFiles'], cb);
 });
 
 // 替换CDN连接

@@ -25,6 +25,7 @@
   "devDependencies": {
     "bignumber.js": "^4.0.0",
     "browser-sync": "^2.18.8",
+    "config": "^1.25.1",
     "del": "^2.2.2",
     "graceful-fs": "^4.1.11",
     "gulp": "^3.9.1",
