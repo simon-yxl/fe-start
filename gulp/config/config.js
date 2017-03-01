@@ -10,6 +10,8 @@ module.exports = {
   "debug":true,
   // 平台 m:移动端，pc:PC端
   "platform":"m",
+  // tinypng API_KEY
+  "TINYPNG_API_KEY":'',
   // 上传配置
   "ftp":{
     host:'10.168.66.180',

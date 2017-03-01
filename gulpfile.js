@@ -5,10 +5,10 @@
  * @date        2017-02-21
  * -------------------------------
  */
-var gulp          = require('gulp');
-var gulpSequence  = require('gulp-sequence');
-var browserSync   = require('browser-sync').create();
-var taskObj       = require('require-dir')('./gulp/tasks');
+const gulp          = require('gulp');
+const gulpSequence  = require('gulp-sequence');
+const browserSync   = require('browser-sync').create();
+const taskObj       = require('require-dir')('./gulp/tasks');
 
 // 基本配置目录
 const CONFIG_DIR = './gulp/config/';
@@ -24,8 +24,19 @@ const PATHS_OBJ = require(CONFIG_DIR + 'path');
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('sass',function(){
+gulp.task('sass',() => {
     return taskObj.sass(PATHS_OBJ, CONFIG_OBJ, browserSync);
+});
+
+/**
+ * @method      imagemin
+ * @description 图片压缩
+ * @param {object} PATHS_OBJ 路径对象
+ * @param {object} CONFIG_OBJ 基础配置参数对象
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('imagemin', function(){
+    return taskObj.imagemin(PATHS_OBJ, CONFIG_OBJ);
 });
 
 
@@ -43,10 +54,6 @@ gulp.task('sass',function(){
 //     return taskObj.compress(paths, browserSync);
 // });
 //
-// // 压缩图片
-// gulp.task('images', function(){
-//     return taskObj.images(paths, browserSync);
-// });
 //
 // // 清除构建任务
 // gulp.task('clean',function(cb){
