@@ -14,7 +14,7 @@ const header = require('gulp-header'); //添加文件头信息
 const gutil = require('gulp-util'); //打印日志，获取参数变量等
 const cached = require('gulp-cached'); // 缓存当前任务中的文件，只让已修改的文件通过管道
 const notify = require('gulp-notify'); //通知
-const prompt = require('prompt');
+const prompt = require('prompt'); // 输入提示进行下一步
 
 /**
  * @function
@@ -67,7 +67,8 @@ module.exports = function (PATHS, CONFIG, browserSync) {
 		prompt.start();
 		var sassStream = null;
 		prompt.get([{
-			name: 'filename'
+			name: 'filename',
+			description: '输入需要编译的 sass 文件名，为空时编译全部'
 		}], function (err, result) {
 			if (result.filename) {
 				sassStream = compile(PATHS.BEFORE.CSS + '**/**/' + result.filename);
