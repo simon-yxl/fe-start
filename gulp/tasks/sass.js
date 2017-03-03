@@ -37,7 +37,7 @@ module.exports = function (PATHS, CONFIG, browserSync, watchTask) {
 				// stopOnError: true,   // 错误是否忽略继续编译
 				style: "compressed",    // 压缩css
 				emitCompileError: true, // 编译出错时，允许一个gulp报错
-				loadPath: ['./' + PATHS.BEFORE.CSS + 'core', './' + PATHS.BEFORE.CSS + 'module'] //查找文件根目录
+				loadPath: [path.resolve(PATHS.BEFORE.CSS, '../') + '/core', path.resolve(PATHS.BEFORE.CSS, '../') + '/module'] //查找文件根目录
 			})
 			.on('error', function (err) { // 打印日志
 				notify.onError({
@@ -85,7 +85,7 @@ module.exports = function (PATHS, CONFIG, browserSync, watchTask) {
 		var sassStream = null;
 		prompt.get([{
 			name: 'filename',
-			description: 'Enter sass filename, please.Deault all files, if it\'s empty'
+			description: 'Enter file name SASS, please default all files if it is empty'
 		}], function (err, result) {
 			if (result.filename) {
 				sassStream = compile(PATHS.BEFORE.CSS + '**/**/' + result.filename);

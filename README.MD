@@ -4,13 +4,11 @@
 
 `node`
 
-`gulp`
-
-`webpack`
-
 ## 安装
 
-待定...
+````
+npm install
+````
 
 ## 目的
 

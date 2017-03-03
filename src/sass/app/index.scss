@@ -4,11 +4,10 @@
 /* 重置 */
 @import "../core/reset.scss";
 /* 公共方法 */
-@import "../core/base.scss";
+@import "base";
 
 /* @if 需要字体图标 */
 @import "../core/iconfont";
 /* @end 需要字体图标 */
-
 /* 按钮 */
 @import "../module/btn.scss";
