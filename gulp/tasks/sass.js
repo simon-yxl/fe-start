@@ -5,7 +5,7 @@
  * @date        2017-03-01
  * -------------------------------
  */
-const gulp         = require('gulp');
+const gulp         = require('gulp'); //gulp
 const sass         = require('gulp-ruby-sass'); // sass编译
 const autoprefixer = require('gulp-autoprefixer'); // 自动不起css3前缀
 const size         = require('gulp-size'); // 计算文件大小
