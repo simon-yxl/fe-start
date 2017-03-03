@@ -40,6 +40,17 @@ gulp.task('sass',() => {
 });
 
 /**
+ * @method      uglify
+ * @description js文件压缩
+ * @param {object} PATHS_OBJ 路径对象
+ * @param {object} CONFIG_OBJ 基础配置参数对象
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('uglify',() => {
+    return taskObj.uglify(PATHS_OBJ, CONFIG_OBJ, browserSync);
+});
+
+/**
  * @method      imagemin
  * @description 图片压缩
  * @param {object} PATHS_OBJ 路径对象
