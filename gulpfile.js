@@ -18,6 +18,17 @@ const CONFIG_OBJ = require(CONFIG_DIR + 'config');
 const PATHS_OBJ = require(CONFIG_DIR + 'path');
 
 /**
+ * @method      watch
+ * @description 监控文件变化执行相应的任务
+ * @param {object} PATHS_OBJ 路径对象
+ * @param {object} CONFIG_OBJ 基础配置参数对象
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('watch', () => {
+   return taskObj.watch(PATHS_OBJ, CONFIG_OBJ, browserSync);
+});
+
+/**
  * @method      sass
  * @description sass编译
  * @param {object} PATHS_OBJ 路径对象
@@ -35,17 +46,14 @@ gulp.task('sass',() => {
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('imagemin', function(){
-    return taskObj.imagemin(PATHS_OBJ, CONFIG_OBJ);
-});
+// gulp.task('imagemin', function(){
+//     return taskObj.imagemin(PATHS_OBJ, CONFIG_OBJ);
+// });
 
 
 // global.buildVersion = process.env.VERSION;
 
-// 监听任务
-// gulp.task('watch', function(){
-//    return taskObj.watch(paths, browserSync);
-// });
+
 //
 
 //
