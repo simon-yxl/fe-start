@@ -7,7 +7,7 @@
  */
 module.exports = {
   // 如果 debug 为true，则开启本地调试模式，默认为false
-  "debug":true,
+  "debug":false,
   // 平台 m:移动端，pc:PC端
   "platform":"m",
   // tinypng API_KEY

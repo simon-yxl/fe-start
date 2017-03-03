@@ -28,11 +28,13 @@ const del          = require('del'); //删除文件
 module.exports = function (PATHS, CONFIG, browserSync, watchTask) {
 	// 获取package.json对象
 	const PKG = require(PATHS.ROOT + 'package.json');
+	console.log(CONFIG.debug);
 
 	// sass编译
 	var compile = (file) => {
 		return sass(file, {
 				sourcemap: CONFIG.debug,
+				trace:true,
 				precision: 6,           // sass中计算精度
 				// stopOnError: true,   // 错误是否忽略继续编译
 				style: "compressed",    // 压缩css
@@ -54,6 +56,7 @@ module.exports = function (PATHS, CONFIG, browserSync, watchTask) {
 			.pipe(header(PKG.banner, { pkg: PKG }))
 			.pipe(size({ title: 'styles', gzip: true }))
 			.pipe(sourcemaps.write('maps',{
+				addComment:CONFIG.debug,
 				includeContent:false,
 				sourceRoot:PATHS.AFTER.CSS
 			}))
