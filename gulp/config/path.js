@@ -7,7 +7,7 @@
  */
 
 // 获取项目跟目录
-var path = require('path');
+const path = require('path');
 const ROOT = path.resolve(__dirname, '../../');
 
 module.exports = {

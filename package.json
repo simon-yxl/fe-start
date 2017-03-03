@@ -5,7 +5,7 @@
   "banner": "/*!\n * copyright (c) 2016-2017, <%= pkg.author %> v<%= pkg.version %>\n * description: <%= pkg.description %>\n * build time: <%= new Date() %>\n */\n",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "gulp watch"
+    "start": "gulp watch"
   },
   "repository": {
     "type": "git",
