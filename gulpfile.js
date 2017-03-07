@@ -6,7 +6,8 @@
  * -------------------------------
  */
 const gulp          = require('gulp');
-const gulpSequence  = require('gulp-sequence');
+const gulpSequence  = require('gulp-sequence'); // gulp任务执行顺序
+// const Q             = require('q'); // promise功能
 const browserSync   = require('browser-sync').create();
 const taskObj       = require('require-dir')('./gulp/tasks');
 
@@ -14,52 +15,47 @@ const taskObj       = require('require-dir')('./gulp/tasks');
 const CONFIG_DIR = './gulp/config/';
 // 基本项目配置
 const CONFIG_OBJ = require(CONFIG_DIR + 'config');
-// 目录配置
-const PATHS_OBJ = require(CONFIG_DIR + 'path');
 
 /**
  * @method      watch
  * @description 监控文件变化执行相应的任务
- * @param {object} PATHS_OBJ 路径对象
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('watch', () => {
-   return taskObj.watch(PATHS_OBJ, CONFIG_OBJ, browserSync);
+   return taskObj.watch(CONFIG_OBJ, browserSync);
 });
 
 /**
  * @method      sass
  * @description sass编译
- * @param {object} PATHS_OBJ 路径对象
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('sass',() => {
-    return taskObj.sass(PATHS_OBJ, CONFIG_OBJ, browserSync);
+    return taskObj.sass(CONFIG_OBJ, browserSync);
 });
 
 /**
- * @method      uglify
+ * @method      compress
  * @description js文件压缩
- * @param {object} PATHS_OBJ 路径对象
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('uglify',() => {
-    return taskObj.uglify(PATHS_OBJ, CONFIG_OBJ, browserSync);
+gulp.task('compress',() => {
+    return taskObj.compress(CONFIG_OBJ, browserSync);
 });
 
 /**
- * @method      imagemin
+ * @method      imagemini
  * @description 图片压缩
- * @param {object} PATHS_OBJ 路径对象
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
-// gulp.task('imagemin', function(){
-//     return taskObj.imagemin(PATHS_OBJ, CONFIG_OBJ);
-// });
+gulp.task('imagemini', () => {
+    return taskObj.imagemini(CONFIG_OBJ, browserSync);
+})
+
 
 
 // global.buildVersion = process.env.VERSION;

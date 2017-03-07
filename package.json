@@ -43,6 +43,7 @@
     "gulp.spritesmith": "^6.3.0",
     "merge-stream": "^1.0.1",
     "minimatch": "^3.0.3",
+    "node-notify": "^1.0.0",
     "path": "^0.12.7",
     "prompt": "^1.0.0",
     "require-dir": "^0.3.1",
