@@ -22,7 +22,7 @@ module.exports = {
   },
  // 根目录
   "root": root+'/',
-  // css相关配置
+  // sass编译相关配置
   "css":{
     "src":'src/sass/app/',
     "assets":'assets/css/',
@@ -32,20 +32,27 @@ module.exports = {
     "ext":['sass', 'scss', 'css'],
     "suffix":''
   },
-  // js相关配置
+  // js编译相关配置
   "js":{
     "src":'src/scripts/app/',
     "assets":'assets/js/',
     "ext":['js'],
     "suffix":'.min'
   },
-  // 图片相关配置
+  // 图片编译相关配置
   "images":{
     "src":'src/images/',
     "assets":'assets/images/',
     "tiny_api_key":'PX5DcFnxfCnKGyyBpqgJoUUe9ibfbVkI',
     "ext":['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'],
     "suffix":''
+  },
+  // base64相关配置
+  "base64":{
+    "ext":['png', 'jpg', 'jpeg', 'svg', 'webp'],
+    "suffix":"__inline",
+    "maxImageSize":8,  // k
+    "exclude":['gif']
   },
   // 上传配置
   "ftp":{

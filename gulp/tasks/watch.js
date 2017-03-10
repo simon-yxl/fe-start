@@ -10,6 +10,9 @@ const taskObj     = require('require-dir')('./');
 // const gutil       = require('gulp-util');
 // const iconv       = require('gulp-iconv');
 
+// 使用genorator迭代器
+require('gulp-awaitable-tasks')(gulp);
+
 /**
  * @function
  * @param {object} CONFIG 基础配置参数对象
@@ -35,18 +38,20 @@ module.exports = function(CONFIG, browserSync){
   });
 
   // sass文件变更触发自动编译
-  gulp.watch(CONFIG.css.src + '**/*.'+CONFIG.css.ext.join(',').toLowerCase(), function(event){
-    return taskObj.sass(CONFIG, browserSync, event);   
+  gulp.watch(CONFIG.css.src + '**/*.{'+CONFIG.css.ext.join(',').toLowerCase()+'}', function *(event){
+    yield taskObj.sass(CONFIG, browserSync, event);   
+    yield taskObj.base64(CONFIG, browserSync, event);
   });
 
-  // sass文件变更触发自动编译
-  gulp.watch(CONFIG.js.src + '**/*.'+CONFIG.js.ext.join(',').toLowerCase(), function(event){
-    return taskObj.compress(CONFIG, browserSync, event);   
+  // js文件自动压缩
+  gulp.watch(CONFIG.js.src + '**/*.js', function (event){
+    // return taskObj.compress(CONFIG, browserSync, event);   
+    return taskObj.compress(CONFIG, browserSync, event);
+    
   });
 
   // 监控图片变化，自动压缩
-  gulp.watch(CONFIG.images.src + '**/*.{'+CONFIG.images.ext.join(',').toLowerCase()+'}', function(event){
-    console.log('测试图片压缩');
-    return taskObj.imagemini(CONFIG, browserSync, event);   
-  });
+  // gulp.watch(CONFIG.images.src + '**/*.{'+CONFIG.images.ext.join(',').toLowerCase()+'}', function(event){
+  //   return taskObj.imagemini(CONFIG, browserSync, event);   
+  // });
 };

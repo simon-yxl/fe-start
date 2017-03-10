@@ -5,11 +5,15 @@
  * @date        2017-02-21
  * -------------------------------
  */
-const gulp          = require('gulp');
+const gulp = require('gulp');
 const gulpSequence  = require('gulp-sequence'); // gulp任务执行顺序
-// const Q             = require('q'); // promise功能
-const browserSync   = require('browser-sync').create();
-const taskObj       = require('require-dir')('./gulp/tasks');
+const requireDir = require('require-dir');
+const browserSync = require('browser-sync').create();
+const taskObj = requireDir('./gulp/tasks');
+const utils = requireDir('./gulp/utils'); // 工具类
+
+// 使用genorator迭代器
+// require('gulp-awaitable-tasks')(gulp);
 
 // 基本配置目录
 const CONFIG_DIR = './gulp/config/';
@@ -23,7 +27,7 @@ const CONFIG_OBJ = require(CONFIG_DIR + 'config');
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('watch', () => {
-   return taskObj.watch(CONFIG_OBJ, browserSync);
+    return taskObj.watch(CONFIG_OBJ, browserSync);
 });
 
 /**
@@ -32,9 +36,10 @@ gulp.task('watch', () => {
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('sass',() => {
-    return taskObj.sass(CONFIG_OBJ, browserSync);
+gulp.task('sass', () => {
+    return utils.handleEnter(taskObj.sass, [CONFIG_OBJ, browserSync]);
 });
+
 
 /**
  * @method      compress
@@ -42,8 +47,9 @@ gulp.task('sass',() => {
  * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('compress',() => {
-    return taskObj.compress(CONFIG_OBJ, browserSync);
+gulp.task('compress', () => {
+    // return taskObj.compress(CONFIG_OBJ, browserSync);
+    return utils.handleEnter(taskObj.sass, [CONFIG_OBJ, browserSync]);
 });
 
 /**
@@ -53,9 +59,9 @@ gulp.task('compress',() => {
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('imagemini', () => {
-    return taskObj.imagemini(CONFIG_OBJ, browserSync);
+    // return taskObj.imagemini(CONFIG_OBJ, browserSync);
+    return utils.handleEnter(taskObj.imagemini, [CONFIG_OBJ, browserSync]);
 })
-
 
 
 // global.buildVersion = process.env.VERSION;

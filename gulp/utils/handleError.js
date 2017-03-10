@@ -6,6 +6,10 @@
  * -------------------------------
  */
 var notify = require("gulp-notify"); // 通知
+
+/**
+ * @function
+ */
 module.exports = function(){
 	var args = Array.prototype.slice.call(arguments);
 	notify.onError({

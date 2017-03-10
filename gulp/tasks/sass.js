@@ -7,6 +7,7 @@
  */
 const gulp         = require('gulp'); //gulp
 const sass         = require('gulp-ruby-sass'); // sass编译
+const base64 = require('gulp-base64'); // 图片转base64
 const autoprefixer = require('gulp-autoprefixer'); // 自动不起css3前缀
 const size         = require('gulp-size'); // 计算文件大小
 const sourcemaps   = require('gulp-sourcemaps'); //配置sourcemaps文件功能
@@ -21,10 +22,11 @@ const utils        = require('require-dir')('../utils');
  * @param {object} browserSync 异步浏览器控制
  * @param {object} watchTask watch任务
  */
-module.exports = function (CONFIG, browserSync, watchTask) {
+module.exports = function (CONFIG, browserSync, watchTask, filename) {
 	// 获取package.json对象
 	const PKG = require(CONFIG.root + 'package.json');
-
+	// 需要转base64的图片格式
+	const reg = new RegExp("\.("+CONFIG.base64.ext.join("|")+")#"+CONFIG.base64.suffix, "i");
 	// sass编译
 	var compile = (file) => {
 		const cssRoot = path.resolve(CONFIG.css.src, '../');
@@ -37,7 +39,13 @@ module.exports = function (CONFIG, browserSync, watchTask) {
 				emitCompileError: true, // 编译出错时，允许一个gulp报错
 				loadPath: [cssRoot + '/core', cssRoot + '/module'] //查找文件根目录
 			})
-			.on('error', utils.handleError)
+			.pipe(base64({
+        // baseDir: 'assets',
+        extensions: [reg],
+        exclude:    CONFIG.base64.exclude,
+        maxImageSize: CONFIG.base64.maxImageSize*1024, // bytes 
+        debug: CONFIG.debug
+      }))
 			.pipe(cached('sass'))
 			.pipe(autoprefixer({
 				browsers: CONFIG.css.autoprefixer.browsers
@@ -54,11 +62,12 @@ module.exports = function (CONFIG, browserSync, watchTask) {
 				includeContent: false,
 				sourceRoot: CONFIG.css.assets
 			}))
+			.on('error', utils.handleError)
 			.pipe(gulp.dest(CONFIG.css.assets))
 			.pipe(browserSync.stream())
 			.pipe(utils.through());
 	}
 
-	return utils.exeTask(compile, CONFIG.css, watchTask);
+	return utils.exeTask(compile, CONFIG.css, watchTask, filename);
 
 };

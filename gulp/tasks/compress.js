@@ -21,7 +21,7 @@ const utils        = require('require-dir')('../utils');
  * @param {object} browserSync 异步浏览器控制
  * @param {object} watchTask watch任务
  */
-module.exports = function (CONFIG, browserSync, watchTask) {
+module.exports = function (CONFIG, browserSync, watchTask, filename) {
     // 获取package.json对象
 	const PKG = require(CONFIG.root + 'package.json');
 	// js压缩流
@@ -52,6 +52,6 @@ module.exports = function (CONFIG, browserSync, watchTask) {
         }))
 	}
 
-    return utils.exeTask(mini, CONFIG.js, watchTask);
+    return utils.exeTask(mini, CONFIG.js, watchTask, filename);
 
 };

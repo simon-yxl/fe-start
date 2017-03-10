@@ -15,8 +15,9 @@ const del = require('del'); //删除文件
  * @param {object} task 当前任务
  * @param {object} taskConfig 当前任务相关配置
  * @param {object} watchTask watch任务
+ * @param {string} filename 文件名
  */
-module.exports = function (task, taskConfig, watchTask) {
+module.exports = function (task, taskConfig, watchTask, filename) {
   if (watchTask) { // 任务处于监控中
     // 文件被修改 or 新增
     if (watchTask.type == 'changed' || watchTask.type == 'added') {
@@ -32,20 +33,14 @@ module.exports = function (task, taskConfig, watchTask) {
         gutil.log(gutil.colors.red('Files and folders that would be deleted:\n' + paths.join('\n')));
       });
     }
-  } else { // 单独使用sass编译命令时
-    prompt.start();
-    var stream = null;
-    prompt.get([{
-      name: 'filename',
-      description: 'Enter file name, please. Default all files if it is empty'
-    }], function (err, result) {
-      if (result.filename) {
-        stream = task(taskConfig.src + '**/**/' + result.filename);
-      } else {
-        const extnames = taskConfig.ext.length > 1 ? '{' + taskConfig.ext.join(',').toLowerCase() + '}' : taskConfig.ext[0]
-        stream = task(taskConfig.src + '**/**/*.' + extnames);
-      }
-    });
-    return stream;
+  } else {
+    var path = taskConfig.src + '**/**/';
+    if(filename) {
+      path += filename;
+    } else {
+      const extnames = taskConfig.ext.length > 1 ? '{' + taskConfig.ext.join(',').toLowerCase() + '}' : taskConfig.ext[0];
+      path += '*.' + extnames;
+    }
+    return task(path);
   }
 }
