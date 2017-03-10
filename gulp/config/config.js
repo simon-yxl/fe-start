@@ -49,10 +49,16 @@ module.exports = {
   },
   // base64相关配置
   "base64":{
-    "ext":['png', 'jpg', 'jpeg', 'svg', 'webp'],
-    "suffix":"__inline",
-    "maxImageSize":8,  // k
-    "exclude":['gif']
+    "src":'assets/css/',
+    "assets":'assets/css/',
+    "ext":['css'],
+    "options":{
+      "ext":['png', 'jpg', 'jpeg', 'svg', 'webp'],
+      "suffix":"__inline",
+      "maxImageSize":8,  // k
+      "exclude":['gif']
+    }
+    
   },
   // 上传配置
   "ftp":{

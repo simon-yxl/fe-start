@@ -40,6 +40,10 @@ gulp.task('sass', () => {
     return utils.handleEnter(taskObj.sass, [CONFIG_OBJ, browserSync]);
 });
 
+// gulp.task('sass_01', () => {
+//     return taskObj.sass(CONFIG_OBJ, browserSync);
+// });
+
 
 /**
  * @method      compress
@@ -61,6 +65,16 @@ gulp.task('compress', () => {
 gulp.task('imagemini', () => {
     // return taskObj.imagemini(CONFIG_OBJ, browserSync);
     return utils.handleEnter(taskObj.imagemini, [CONFIG_OBJ, browserSync]);
+})
+
+/**
+ * @method      base64
+ * @description 图片base64转码
+ * @param {object} CONFIG_OBJ 基础配置参数对象
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('base64', function() {
+    return utils.handleEnter(taskObj.base64, [CONFIG_OBJ, browserSync]);
 })
 
 

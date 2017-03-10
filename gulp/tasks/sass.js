@@ -26,7 +26,7 @@ module.exports = function (CONFIG, browserSync, watchTask, filename) {
 	// 获取package.json对象
 	const PKG = require(CONFIG.root + 'package.json');
 	// 需要转base64的图片格式
-	const reg = new RegExp("\.("+CONFIG.base64.ext.join("|")+")#"+CONFIG.base64.suffix, "i");
+	const reg = new RegExp("\.("+CONFIG.base64.options.ext.join("|")+")#"+CONFIG.base64.options.suffix, "i");
 	// sass编译
 	var compile = (file) => {
 		const cssRoot = path.resolve(CONFIG.css.src, '../');
@@ -42,8 +42,8 @@ module.exports = function (CONFIG, browserSync, watchTask, filename) {
 			.pipe(base64({
         // baseDir: 'assets',
         extensions: [reg],
-        exclude:    CONFIG.base64.exclude,
-        maxImageSize: CONFIG.base64.maxImageSize*1024, // bytes 
+        exclude:    CONFIG.base64.options.exclude,
+        maxImageSize: CONFIG.base64.options.maxImageSize*1024, // bytes 
         debug: CONFIG.debug
       }))
 			.pipe(cached('sass'))
