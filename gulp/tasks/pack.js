@@ -1,23 +1,23 @@
-// /**
-//  * -------------------------------
-//  * @file        pack.js
-//  * @description 文件打包
-//  * @date        2017-03-14
-//  * -------------------------------
-//  */
-// const gulp = require('gulp');
-// const path        = require('path');
-// const fs          = require('fs');
-// const gutil       = require('gulp-util');
-// const webpack     = require('webpack-stream');
+/**
+ * -------------------------------
+ * @file        pack.js
+ * @description 文件打包
+ * @date        2017-03-14
+ * -------------------------------
+ */
+const gulp = require('gulp');
+const path        = require('path');
+const fs          = require('fs');
+const gutil       = require('gulp-util');
+const webpack     = require('webpack-stream');
 
-// /**
-//  * @function
-//  * @param {object} browserSync 异步浏览器控制
-//  * @param {object} watchTask watch任务
-//  * @param {string} filename 文件名
-//  */
-// module.exports = (browserSync, watchTask, filename) => {
+/**
+ * @function
+ * @param {object} browserSync 异步浏览器控制
+ * @param {object} watchTask watch任务
+ * @param {string} filename 文件名
+ */
+module.exports = (browserSync, watchTask, filename) => {
 //   var paths = config.paths;
 //   var watchPaths = [paths.SCRIPTS, paths.UI_SCRIPTS];
 //   // var file = gutil.env['file'];
@@ -102,4 +102,4 @@
 //     .on('end', function(e) {
 //       browserSync.reload();
 //     });
-// };
+};

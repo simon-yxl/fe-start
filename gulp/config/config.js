@@ -34,8 +34,8 @@ module.exports = {
   },
   // 打包配置编译相关配置
   "pack":{
-    "src":'src/scripts/app/',
-    "assets":'assets/js/',
+    "src":['src/scripts/app/'],
+    "assets":['assets/js/'],
     "ext":['js']
   },
   // compress压缩js配置

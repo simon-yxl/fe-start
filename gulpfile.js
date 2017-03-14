@@ -58,7 +58,7 @@ gulp.task('compress', () => {
 /**
  * @method      webpack打包
  * @public
- * @description js文件打包
+ * @description 文件打包
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('pack', function() {
