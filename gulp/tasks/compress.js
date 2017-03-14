@@ -19,6 +19,7 @@ const utils = requireDir('../utils');
 const stream = requireDir('../utils/stream');
 const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文件
 const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
+
 /**
  * @function
  * @param {object} browserSync 异步浏览器控制
@@ -32,13 +33,13 @@ module.exports = (browserSync, watchTask, filename) => {
 			.pipe(cached('compress')));
 
 		// 如果开发模式
-		if (CONFIG.debug) {
-			gulpQ = gulpQ.then((s) => {
-				return s.pipe(sourcemaps.init({
-					loadMaps: CONFIG.debug
-				}))
-			})
-		}
+		// if (CONFIG.debug) {
+		// 	gulpQ = gulpQ.then((s) => {
+		// 		return s.pipe(sourcemaps.init({
+		// 			loadMaps: CONFIG.debug
+		// 		}))
+		// 	})
+		// }
 
 		gulpQ.then((s) => {
 			return s.pipe(plumber({
@@ -65,11 +66,11 @@ module.exports = (browserSync, watchTask, filename) => {
 		})
 
 		// 如果开发模式
-		if (CONFIG.debug) {
-			gulpQ = gulpQ.then((s) => {
-				return stream.sourcemaps(s, CONFIG.compress.src);
-			})
-		}
+		// if (CONFIG.debug) {
+		// 	gulpQ = gulpQ.then((s) => {
+		// 		return stream.sourcemaps(s, CONFIG.compress.src);
+		// 	})
+		// }
 
 		var gulpStream = null;
 		gulpQ.then((s) => {

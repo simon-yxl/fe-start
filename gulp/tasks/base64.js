@@ -22,7 +22,7 @@ const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文�
  */
 module.exports = (browserSync, watchTask, filename) => {
 	
-	// sass编译
+	// base64转换
   var toBae64 = (file) => {
     var gulpQ = Q(gulp.src(file)
       .pipe(cached('base64')));

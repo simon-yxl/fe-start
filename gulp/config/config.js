@@ -32,8 +32,8 @@ module.exports = {
     "ext":['sass', 'scss', 'css'],
     "suffix":''
   },
-  // js编译相关配置
-  "js":{
+  // 打包配置编译相关配置
+  "pack":{
     "src":'src/scripts/app/',
     "assets":'assets/js/',
     "ext":['js']

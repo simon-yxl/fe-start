@@ -6,16 +6,17 @@
  * -------------------------------
  */
 const gulp        = require('gulp');
-const taskObj     = require('require-dir')('./');
-// const gutil       = require('gulp-util');
-// const iconv       = require('gulp-iconv');
+const requireDir = require('require-dir');
+const taskObj = requireDir('./');
+const utils = requireDir('../utils');
+const stream = requireDir('../utils/stream');
+const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文件
 
 /**
  * @function
- * @param {object} CONFIG 基础配置参数对象
  * @param {object} browserSync 异步浏览器控制
  */
-module.exports = (CONFIG, browserSync) => {
+module.exports = (browserSync) => {
   // 启动服务   API: //www.browsersync.io/docs/options/
   browserSync.init({
     // proxy: '//10.168.0.151:4000',      // 代理配置
@@ -30,14 +31,13 @@ module.exports = (CONFIG, browserSync) => {
   });
 
   // HTML文件改变，刷新页面
-  gulp.watch(CONFIG.root + "*.{html,htm}", function(event){
+  gulp.watch(CONFIG.root + "*.{html,htm}", () => {
     browserSync.reload();
   });
 
   // sass文件变更触发自动编译
-  gulp.watch(CONFIG.css.src + '**/*.{'+CONFIG.css.ext.join(',').toLowerCase()+'}', function (event){
-    return taskObj.sass(CONFIG, browserSync, event);   
-    // yield taskObj.base64(CONFIG, browserSync, event);
+  gulp.watch(CONFIG.sass.src + '**/*.{'+CONFIG.sass.ext.join(',').toLowerCase()+'}', (event) => {
+    return taskObj.sass(browserSync, event);   
   });
 
   // js文件自动压缩

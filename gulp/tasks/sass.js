@@ -28,7 +28,7 @@ module.exports = (browserSync, watchTask, filename) => {
 
 	// sass编译
 	const compile = (file) => {
-		const cssRoot = path.resolve(CONFIG.css.src, '../');
+		const cssRoot = path.resolve(CONFIG.sass.src, '../');
 
 		var gulpQ = Q(sass(file, {
 					sourcemap: CONFIG.debug,
@@ -41,14 +41,14 @@ module.exports = (browserSync, watchTask, filename) => {
 				})
 				.pipe(cached('sass'))
 				.pipe(autoprefixer({
-					browsers: CONFIG.css.autoprefixer.browsers
+					browsers: CONFIG.sass.autoprefixer.browsers
 				}))
 				.pipe(header(PKG.banner, {
 					pkg: PKG
 				})))
 
 		// 添加依赖的任务处理，例如 base64
-		const dependent = CONFIG.css.dependent;
+		const dependent = CONFIG.sass.dependent;
 		if (dependent && dependent.length > 0) {
 			dependent.forEach((task) => {
 				gulpQ = gulpQ.then((s) => {
