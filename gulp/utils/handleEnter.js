@@ -36,17 +36,16 @@ module.exports = function(task){
         });
     }).then((filename) => {
       if(typeof task == 'function'){
-        return task(params[0], params[1], null, filename);
+        return task(params[0], null, filename);
       } else if(task instanceof Array){
         if(task.length >= 2){ 
-         
+         //多个任务
         } else {
-          return task[0](params[0], params[1], null, filename);
+          return task[0](params[0], null, filename);
         }
       } else {
         gutil.log(gutil.colors.red('Error!'));
       }
-      
     })
   } else {
     gutil.log(gutil.colors.red('Error!'));

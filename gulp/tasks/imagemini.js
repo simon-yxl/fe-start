@@ -18,7 +18,7 @@ const utils = require('require-dir')('../utils');
  * @param {object} browserSync 异步浏览器控制
  * @param {object} watchTask watch任务
  */
-module.exports = function (CONFIG, browserSync, watchTask, filename) {
+module.exports = (CONFIG, browserSync, watchTask, filename) => {
   var tiny = function (file) {
     return gulp.src(file)
       .pipe(cached('imagemini'))

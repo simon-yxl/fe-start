@@ -8,10 +8,9 @@
 // 获取项目跟目录
 const path = require('path');
 const root = path.resolve(__dirname, '../../');
-
 module.exports = {
   // 如果 debug 为true，则开启本地调试模式，默认为false
-  "debug":false,
+  "debug":true,
   // 平台 m:移动端，pc:PC端
   "platform":"m",
   // 静态服务器相关配置
@@ -23,18 +22,25 @@ module.exports = {
  // 根目录
   "root": root+'/',
   // sass编译相关配置
-  "css":{
+  "sass":{
     "src":'src/sass/app/',
     "assets":'assets/css/',
      "autoprefixer": {
         "browsers": ["ios >= 6", "android >= 4.0"]
     },
+    "dependent":['base64'],
     "ext":['sass', 'scss', 'css'],
     "suffix":''
   },
   // js编译相关配置
   "js":{
     "src":'src/scripts/app/',
+    "assets":'assets/js/',
+    "ext":['js']
+  },
+  // compress压缩js配置
+  "compress":{
+    "src":'assets/js/',
     "assets":'assets/js/',
     "ext":['js'],
     "suffix":'.min'
@@ -58,7 +64,6 @@ module.exports = {
       "maxImageSize":8,  // k
       "exclude":['gif']
     }
-    
   },
   // 上传配置
   "ftp":{

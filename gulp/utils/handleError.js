@@ -5,7 +5,7 @@
  * @date        2017-03-07
  * -------------------------------
  */
-var notify = require("gulp-notify"); // 通知
+const notify = require("gulp-notify"); // 通知
 
 /**
  * @function

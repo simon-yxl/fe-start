@@ -7,87 +7,84 @@
  */
 const gulp = require('gulp');
 const gulpSequence  = require('gulp-sequence'); // gulp任务执行顺序
-const requireDir = require('require-dir');
 const browserSync = require('browser-sync').create();
+const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
 const utils = requireDir('./gulp/utils'); // 工具类
-
-// 使用genorator迭代器
-// require('gulp-awaitable-tasks')(gulp);
-
-// 基本配置目录
-const CONFIG_DIR = './gulp/config/';
-// 基本项目配置
-const CONFIG_OBJ = require(CONFIG_DIR + 'config');
+const CONFIG = requireDir('./gulp/utils/global').config(); // 获取全局配置文件
 
 /**
  * @method      watch
+ * @public
  * @description 监控文件变化执行相应的任务
- * @param {object} CONFIG_OBJ 基础配置参数对象
+ * @param {object} CONFIG 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('watch', () => {
-    return taskObj.watch(CONFIG_OBJ, browserSync);
+    return taskObj.watch(browserSync);
 });
 
 /**
  * @method      sass
+ * @public
  * @description sass编译
- * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('sass', () => {
-    return utils.handleEnter(taskObj.sass, [CONFIG_OBJ, browserSync]);
+    return utils.handleEnter(taskObj.sass, [browserSync]);
 });
 
-// gulp.task('sass_01', () => {
-//     return taskObj.sass(CONFIG_OBJ, browserSync);
-// });
+/**
+ * @method      prv_sass
+ * @private     私有
+ * @description sass编译
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.add('prv_sass', () => {
+    return taskObj.sass(browserSync);
+});
 
 
 /**
  * @method      compress
+ * @public
  * @description js文件压缩
- * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('compress', () => {
-    // return taskObj.compress(CONFIG_OBJ, browserSync);
-    return utils.handleEnter(taskObj.sass, [CONFIG_OBJ, browserSync]);
+    return utils.handleEnter(taskObj.compress, [browserSync]);
+});
+
+/**
+ * @method      webpack打包
+ * @public
+ * @description js文件打包
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('pack', function() {
+  return utils.handleEnter(taskObj.pack, [browserSync]);
 });
 
 /**
  * @method      imagemini
+ * @public
  * @description 图片压缩
- * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('imagemini', () => {
-    // return taskObj.imagemini(CONFIG_OBJ, browserSync);
-    return utils.handleEnter(taskObj.imagemini, [CONFIG_OBJ, browserSync]);
+    return utils.handleEnter(taskObj.imagemini, [browserSync]);
 })
 
 /**
  * @method      base64
+ * @public
  * @description 图片base64转码
- * @param {object} CONFIG_OBJ 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('base64', function() {
-    return utils.handleEnter(taskObj.base64, [CONFIG_OBJ, browserSync]);
+gulp.task('base64', () => {
+    return utils.handleEnter(taskObj.base64, [browserSync]);
 })
 
-
-// global.buildVersion = process.env.VERSION;
-
-
-//
-
-//
-// // javascript 压缩
-// gulp.task('compress', function() {
-//     return taskObj.compress(paths, browserSync);
-// });
 //
 //
 // // 清除构建任务
@@ -126,10 +123,7 @@ gulp.task('base64', function() {
 //    return taskObj.sprites(paths);
 // });
 //
-// // webpack 打包
-// gulp.task('webpack:pack', function() {
-//   return taskObj.pack(paths, browserSync);
-// });
+
 
 //retina
 // gulp.task('retina', function(){
