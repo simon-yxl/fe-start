@@ -6,7 +6,7 @@
  * -------------------------------
  */
 const gulp = require('gulp');
-const gulpSequence  = require('gulp-sequence'); // gulp任务执行顺序
+// const gulpSequence  = require('gulp-sequence'); // gulp任务执行顺序
 const browserSync = require('browser-sync').create();
 const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
