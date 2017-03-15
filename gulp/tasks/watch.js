@@ -9,8 +9,8 @@ const gulp        = require('gulp');
 const requireDir = require('require-dir');
 const taskObj = requireDir('./');
 const utils = requireDir('../utils');
-const stream = requireDir('../utils/stream');
-const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文件
+const stream = utils.stream;
+const CONFIG = utils.global.config(); // 获取全局配置文件
 
 /**
  * @function

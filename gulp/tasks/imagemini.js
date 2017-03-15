@@ -11,13 +11,13 @@ const imagemin = require('gulp-tinypng-compress'); // tinypng方式压缩图片�
 const cached = require('gulp-cached'); // 缓存当前任务中的文件，只让已修改的文件通过管道
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
-const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文件
+const CONFIG = utils.global.config(); // 获取全局配置文件
 
 /**
  * @function
- * @param {object} CONFIG 基础配置参数对象
  * @param {object} browserSync 异步浏览器控制
  * @param {object} watchTask watch任务
+ * @return {object} gulp流
  */
 module.exports = (browserSync, watchTask, filename) => {
   var tiny = function (file) {

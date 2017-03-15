@@ -12,18 +12,19 @@ const uglify = require('gulp-uglify'); // js压缩
 const header = require('gulp-header'); //添加文件头信息
 const plumber = require('gulp-plumber'); //添加文件头信息
 const cached = require('gulp-cached'); // 缓存当前任务中的文件，只让已修改的文件通过管道
-const sourcemaps = require('gulp-sourcemaps'); //配置sourcemaps文件功能
+// const sourcemaps = require('gulp-sourcemaps'); //配置sourcemaps文件功能
 const rename = require('gulp-rename'); // 文件重命名
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
-const stream = requireDir('../utils/stream');
-const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文件
+const stream = utils.stream;
+const CONFIG = utils.global.config(); // 获取全局配置文件
 const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
 
 /**
  * @function
  * @param {object} browserSync 异步浏览器控制
  * @param {object} watchTask watch任务
+ * @return {object} gulp流
  */
 module.exports = (browserSync, watchTask, filename) => {
 

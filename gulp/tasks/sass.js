@@ -15,8 +15,8 @@ const path = require('path'); //获取路径相关
 const Q = require('q'); // promise功能
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
-const stream = requireDir('../utils/stream');
-const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文件
+const stream = utils.stream;
+const CONFIG = utils.global.config(); // 获取全局配置文件
 const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
 
 /**
