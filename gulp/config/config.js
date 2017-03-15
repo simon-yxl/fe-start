@@ -10,69 +10,69 @@ const path = require('path');
 const root = path.resolve(__dirname, '../../');
 module.exports = {
   // 如果 debug 为true，则开启本地调试模式，默认为false
-  "debug":true,
+  "debug": true,
   // 平台 m:移动端，pc:PC端
-  "platform":"m",
+  "platform": "m",
   // 静态服务器相关配置
-  "server":{
-    "baseDir":'./',
-    "directory":true,
-    "port":8658
+  "server": {
+    "baseDir": './',
+    "directory": true,
+    "port": 8658
   },
- // 根目录
-  "root": root+'/',
+  // 根目录
+  "root": root + '/',
   // sass编译相关配置
-  "sass":{
-    "src":'src/sass/app/',
-    "assets":'assets/css/',
-     "autoprefixer": {
-        "browsers": ["ios >= 6", "android >= 4.0"]
+  "sass": {
+    "src": 'src/sass/app/',
+    "assets": 'assets/css/',
+    "autoprefixer": {
+      "browsers": ["ios >= 6", "android >= 4.0"]
     },
-    "dependent":['base64'],
-    "ext":['sass', 'scss', 'css'],
-    "suffix":''
+    "dependent": ['base64'],
+    "ext": ['sass', 'scss', 'css'],
+    "suffix": ''
   },
   // 打包配置编译相关配置
-  "pack":{
-    "src":['src/scripts/app/'],
-    "assets":['assets/js/'],
-    "ext":['js']
+  "pack": {
+    "src": ['src/scripts/app/'],
+    "assets": ['assets/js/'],
+    "ext": ['js']
   },
   // compress压缩js配置
-  "compress":{
-    "src":'assets/js/',
-    "assets":'assets/js/',
-    "ext":['js'],
-    "suffix":'.min'
+  "compress": {
+    "src": 'assets/js/',
+    "assets": 'assets/js/',
+    "ext": ['js'],
+    "suffix": '.min'
   },
   // 图片编译相关配置
-  "images":{
-    "src":'src/images/',
-    "assets":'assets/images/',
-    "tiny_api_key":'PX5DcFnxfCnKGyyBpqgJoUUe9ibfbVkI',
-    "ext":['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'],
-    "suffix":''
+  "images": {
+    "src": 'src/images/',
+    "assets": 'assets/images/',
+    "tiny_api_key": 'PX5DcFnxfCnKGyyBpqgJoUUe9ibfbVkI',
+    "ext": ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'],
+    "suffix": ''
   },
   // base64相关配置
-  "base64":{
-    "src":'assets/css/',
-    "assets":'assets/css/',
-    "ext":['css'],
-    "options":{
-      "ext":['png', 'jpg', 'jpeg', 'svg', 'webp'],
-      "suffix":"__inline",
-      "maxImageSize":8,  // k
-      "exclude":['gif']
+  "base64": {
+    "src": 'assets/css/',
+    "assets": 'assets/css/',
+    "ext": ['css'],
+    "options": {
+      "ext": ['png', 'jpg', 'jpeg', 'svg', 'webp'],
+      "suffix": "__inline",
+      "maxImageSize": 8, // k
+      "exclude": ['gif']
     }
   },
   // 上传配置
-  "ftp":{
-    "img":{
-      host:'',
-      port:'',
-      user:'',
-      pwd:'',
-      root:''
-    } 
+  "ftp": {
+    "img": {
+      host: '',
+      port: '',
+      user: '',
+      pwd: '',
+      root: ''
+    }
   }
 }

@@ -6,18 +6,14 @@
  * -------------------------------
  */
 const gulp = require('gulp');
-// const gulpSequence  = require('gulp-sequence'); // gulp任务执行顺序
 const browserSync = require('browser-sync').create();
 const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
-const utils = requireDir('./gulp/utils'); // 工具类
-const CONFIG = utils.global.config(); // 获取全局配置文件
 
 /**
  * @method      watch
  * @public
  * @description 监控文件变化执行相应的任务
- * @param {object} CONFIG 基础配置参数对象
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('watch', () => {
@@ -113,6 +109,16 @@ gulp.task('base64', () => {
  */
 gulp.task('ejs', () => {
     // return utils.handleEnter(taskObj.ejs, [browserSync]);
+})
+
+/**
+ * @method      iconfont
+ * @public
+ * @description 生成字体图标
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('iconfont', () => {
+    // return utils.handleEnter(taskObj.iconfont, [browserSync]);
 })
 
 /**
