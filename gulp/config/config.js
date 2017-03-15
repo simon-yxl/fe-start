@@ -68,9 +68,9 @@ module.exports = {
   // 上传配置
   "ftp":{
     "img":{
-      host:'10.168.66.180',
-      port:'21',
-      user:'autoproxy',
+      host:'',
+      port:'',
+      user:'',
       pwd:'',
       root:''
     } 
