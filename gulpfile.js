@@ -1,8 +1,8 @@
 /**
  * -------------------------------
  * @file        gulpfile.js
- * @description gulp配置文件，各种任务开关
- * @date        2017-02-21
+ * @description gulp配置文件，各种任务开关（共有和私有）
+ * @date        2017-03-15
  * -------------------------------
  */
 const gulp = require('gulp');
@@ -56,6 +56,16 @@ gulp.task('compress', () => {
 });
 
 /**
+ * @method      prv_compress
+ * @private     私有
+ * @description 所有js文件压缩
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('prv_compress', () => {
+    return taskObj.compress(browserSync);
+});
+
+/**
  * @method      webpack打包
  * @public
  * @description 文件打包
@@ -63,6 +73,16 @@ gulp.task('compress', () => {
  */
 gulp.task('pack', function() {
   return utils.handleEnter(taskObj.pack, [browserSync]);
+});
+
+/**
+ * @method      prv_pack
+ * @private     私有
+ * @description 所有文件打包
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('prv_pack', function() {
+  return taskObj.pack(browserSync);
 });
 
 /**
@@ -85,47 +105,62 @@ gulp.task('base64', () => {
     return utils.handleEnter(taskObj.base64, [browserSync]);
 })
 
-//
-//
-// // 清除构建任务
-// gulp.task('clean',function(cb){
-//     // return del('./build/*', cb);
-// });
-//
-// // moveFile 移动文件
-// gulp.task('moveFiles',function(){
-//     return taskObj.movefiles(paths, browserSync);
-// });
-//
-// // 发布任务
-// gulp.task('build',function (cb){
-//     // return gulpSequence(['browserify','sass'],['compress'],['moveFiles'], cb);
-// });
-//
-// // 替换CDN连接
-// gulp.task('replace', function () {
-//     return taskObj.replace(paths, browserSync);
-// });
-//
-//
-// //生成项目目录
-// gulp.task('book', function(){
-//   return taskObj.book();
-// })
-//
-// //ejs
-// gulp.task('ejs', function(){
-//    return taskObj.ejs(paths, browserSync);
-// });
-//
-// //精灵图
-// gulp.task('sprites', function(){
-//    return taskObj.sprites(paths);
-// });
-//
+/**
+ * @method      ejs
+ * @public
+ * @description ejs文件编译
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('ejs', () => {
+    // return utils.handleEnter(taskObj.ejs, [browserSync]);
+})
 
+/**
+ * @method      book
+ * @public
+ * @description 生成目录预览文件
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('book', () => {
+    // return utils.handleEnter(taskObj.book, [browserSync]);
+})
 
-//retina
-// gulp.task('retina', function(){
-//    return taskObj.retina(paths);
-// });
+/**
+ * @method      sprites
+ * @public
+ * @description 生成精灵图
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('sprites', () => {
+    // return utils.handleEnter(taskObj.sprites, [browserSync]);
+})
+
+/**
+ * @method      ftp
+ * @public
+ * @description ftp上传，上传相应文件到测试服务器
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('ftp', () => {
+    // return utils.handleEnter(taskObj.ftp, [browserSync]);
+})
+
+/**
+ * @method      CDN
+ * @public
+ * @description CDN地址替换，替换所有的本地地址为cdn地址
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('CDN', () => {
+    // return utils.handleEnter(taskObj.CDN, [browserSync]);
+})
+
+/**
+ * @method      build
+ * @public
+ * @description 项目构建，生成开发需要的前端页面
+ * @param {object} browserSync 异步浏览器
+ */
+gulp.task('build', () => {
+    // return utils.handleEnter(taskObj.build, [browserSync]);
+})
