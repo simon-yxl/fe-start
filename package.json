@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noonbell/fe-start.git"
+    "url": "git+https://github.com/simon-yxl/fe-start.git"
   },
   "keywords": [
     "fe",
@@ -19,9 +19,9 @@
   "author": "yuanxiaolong@gmail.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/noonbell/fe-start/issues"
+    "url": "https://github.com/simon-yxl/fe-start/issues"
   },
-  "homepage": "https://github.com/noonbell/fe-start#readme",
+  "homepage": "https://github.com/simon-yxl/fe-start#readme",
   "devDependencies": {
     "browser-sync": "^2.18.8",
     "del": "^2.2.2",
