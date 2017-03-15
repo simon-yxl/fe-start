@@ -7,8 +7,7 @@
  */
 const path = require('path');
 const fs = require('fs');
-const requireDir = require('require-dir');
-const CONFIG = requireDir('./global').config(); // 获取全局配置文件
+const CONFIG = require('./global').config(); // 获取全局配置文件
 
 /**
  * @function

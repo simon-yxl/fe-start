@@ -9,9 +9,7 @@ const through = require('through2');
 const gutil = require('gulp-util'); // 打印日志，获取参数变量等
 const prompt = require('prompt'); // 输入提示进行下一步
 const del = require('del'); //删除文件
-const requireDir = require('require-dir');
-const utils = requireDir('../utils');
-const CONFIG = requireDir('../utils/global').config(); // 获取全局配置文件
+const CONFIG = require('./global').config(); // 获取全局配置文件
 
 /**
  * @function

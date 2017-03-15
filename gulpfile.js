@@ -11,7 +11,7 @@ const browserSync = require('browser-sync').create();
 const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
 const utils = requireDir('./gulp/utils'); // 工具类
-const CONFIG = requireDir('./gulp/utils/global').config(); // 获取全局配置文件
+const CONFIG = utils.global.config(); // 获取全局配置文件
 
 /**
  * @method      watch

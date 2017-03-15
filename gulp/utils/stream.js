@@ -8,8 +8,7 @@
 
 const base64 = require('gulp-base64'); // 图片转base64
 const sourcemaps = require('gulp-sourcemaps'); // sourcemaps功能
-const requireDir = require('require-dir');
-const CONFIG = requireDir('./').global.config(); // 获取全局配置文件
+const CONFIG = require('./global').config(); // 获取全局配置文件
 
 /**
  * @function
