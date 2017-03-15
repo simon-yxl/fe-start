@@ -9,7 +9,7 @@ const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
-
+const utils = requireDir('./gulp/utils');
 /**
  * @method      watch
  * @public

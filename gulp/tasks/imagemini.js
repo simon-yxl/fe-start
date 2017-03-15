@@ -6,8 +6,10 @@
  * -------------------------------
  */
 const gulp = require('gulp');
-const imagemin = require('gulp-tinypng-compress'); // tinypng方式压缩图片，压缩倍率更高，需要API_KEY，免费注册的每月限制500张图片
-// const imagemin = require('gulp-imagemin'); // 普通的压缩图片插件，压缩倍率不如tinypng
+const Q = require('q'); // promise功能
+const tinypng = require('gulp-tinypng-compress'); // tinypng方式压缩图片，压缩倍率更高，需要API_KEY，免费注册的每月限制500张图片
+const imagemin = require('gulp-imagemin'); // 普通的压缩图片插件，压缩倍率不如tinypng
+const size = require('gulp-size'); // 计算文件大小
 const cached = require('gulp-cached'); // 缓存当前任务中的文件，只让已修改的文件通过管道
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
@@ -21,17 +23,32 @@ const CONFIG = utils.global.config(); // 获取全局配置文件
  */
 module.exports = (browserSync, watchTask, filename) => {
   var tiny = function (file) {
-    return gulp.src(file)
-      .pipe(cached('imagemini'))
-      .pipe(imagemin({
-        key: CONFIG.images.tiny_api_key,
-        sigFile: CONFIG.images.assets + '/.tinypng-sigs',
-        log: true,
-        summarize: true
-      }))
-      .on('error', utils.handleError)
-      .pipe(gulp.dest(CONFIG.images.src))
-      .pipe(utils.through())
+    var gulpQ = Q(gulp.src(file)
+                .pipe(cached('imagemini'))
+                .pipe(size({
+                  title: 'imagemini before',
+                  gzip: true
+                })));
+    gulpQ = gulpQ.then((s) => {
+      if(CONFIG.images.tiny_api_key) {
+        return s.pipe(tinypng({
+          key: CONFIG.images.tiny_api_key,
+          sigFile: CONFIG.images.assets + '/.tinypng-sigs',
+          log: true,
+          summarize: true
+        }))
+      } else {
+        return s.pipe(imagemin());
+      }
+    })
+    var gulpStream = null;
+    gulpQ.then((s) => {
+      gulpStream = s.on('error', utils.handleError)
+                    .pipe(gulp.dest(CONFIG.images.src))
+                    .pipe(utils.through())
+    })
+    .done();
+    return gulpStream;
   }
   return utils.exeTask(tiny, 'images', watchTask, filename);
 };

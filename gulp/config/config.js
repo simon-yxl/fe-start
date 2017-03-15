@@ -49,7 +49,7 @@ module.exports = {
   "images": {
     "src": 'src/images/',
     "assets": 'assets/images/',
-    "tiny_api_key": 'PX5DcFnxfCnKGyyBpqgJoUUe9ibfbVkI',
+    "tiny_api_key": 'PX5DcFnxfCnKGyyBpqgJoUUe9ibfbVkI', // 此key码在https://tinypng.com/上注册，免费版每月免费500张
     "ext": ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'],
     "suffix": ''
   },
