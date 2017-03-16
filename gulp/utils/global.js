@@ -6,6 +6,7 @@
  * @date        2017-03-15
  * -------------------------------
  */
+const path = require('path');
 
 /**
  * @function
@@ -15,8 +16,22 @@ module.exports = {
   'config': () => {
     var CONFIG = global.CONFIG;
     if(!CONFIG) {
-      global.CONFIG = CONFIG = require('../config/config');
+      CONFIG = require('../config/config');
+      // 路径格式化
+      var pathNormalize = (obj) => {
+        for(var k in obj){
+          if(obj[k] instanceof Object){
+            pathNormalize(obj);
+          } else if(typeof obj[k] == 'string') {
+            if(k.indexOf(['src', 'assets']) >= 0) {
+              obj[k] = path.normalize(obj[k]);
+            }
+          }
+        }
+      }
+      global.CONFIG = CONFIG;
     }
+
     return CONFIG;
   }
 }

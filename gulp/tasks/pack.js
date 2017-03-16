@@ -6,10 +6,12 @@
  * -------------------------------
  */
 const gulp = require('gulp');
-const path = require('path');
-const fs = require('fs');
 const gutil = require('gulp-util');
+const plumber = require('gulp-plumber'); //添加文件头信息
 const webpack = require('webpack-stream');
+const requireDir = require('require-dir');
+const utils = requireDir('../utils');
+const CONFIG = utils.global.config(); // 获取全局配置文件
 
 /**
  * @function
@@ -18,88 +20,39 @@ const webpack = require('webpack-stream');
  * @param {string} filename 文件名
  */
 module.exports = (browserSync, watchTask, filename) => {
-  //   var paths = config.paths;
-  //   var watchPaths = [paths.SCRIPTS, paths.UI_SCRIPTS];
-  //   // var file = gutil.env['file'];
-  //   // 获取webpack入口文件对象函数
-  //   function getEntry(pathArr) {
-  //     var files = {};
-  //     if(pathArr instanceof Array){
-  //       pathArr.forEach(function(item){
-  //         let jsPath = path.normalize(item);
-  //         let dirs = fs.readdirSync(jsPath);
-  //         let matchs = [];
-  //         dirs.forEach(function(file) {
-  //           matchs = file.match(/(.+)\.js$/);
-  //           if (matchs) {
-  //             files[matchs[1]] = path.resolve(jsPath, file);
-  //           }
-  //         });
-  //       });
-  //     } else {
-  //       var s = pathArr.split(/[\/\\]/gi);
-  //       var filename = s[s.length - 1].match(/.+(?=\.)/);
-  //       files[filename] = pathArr;
-  //     }
-  //     return files;
-  //   }
+  var enrties = utils.getEntry('pack');
+  if(enrties) {
+    var webpackConfig = {
+      entry: enrties,
+      output: {
+        filename: '[name].js'
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+          }
+        ]
+      },
+      resolve: {
+        extensions: CONFIG.pack.ext.js
+      },
+      devtool:CONFIG.debug ? 'cheap-module-source-map' : '',
+      externals: {
+        zepto: 'Zepto'
+      }
+    };
+    return gulp.src(CONFIG.pack.src.js)
+    .pipe(webpack(webpackConfig))
+    .pipe(plumber({
+      errorHandler: utils.handleError
+    }))
+    .pipe(gulp.dest(CONFIG.pack.assets.js))
+    .pipe(utils.through(function () {
+						browserSync.reload();
+					}))
 
-  //   var needPaths = [];
-  //   if(ev && (ev.type == 'changed' || ev.type == 'added' || ev.type == 'deleted')){
-  //     if(ev.type == 'changed' || ev.type == 'added'){
-  //       watchPaths = ev.path;
-  //       needPaths = [ev.path];
-  //     } else {
-  //       return;
-  //     }
-  //   } else {
-  //     if(file){
-  //       needPaths = paths.SCRIPTS + (file.indexOf('.js') > 0 ? file : file +'.js');
-  //       watchPaths = paths.ROOT + needPaths;
-  //     } else {
-  //       watchPaths.forEach(function(item){
-  //         needPaths.push(item+'**/*.js');
-  //       });
-  //     }
-  //   }
-
-  //   var webpackConfig = {
-  //     entry: getEntry(watchPaths),
-  //     output: {
-  //       filename: '[name].js'
-  //     },
-  //     module: {
-  //       loaders: [
-  //         {
-  //           test: /\.js$/,
-  //           exclude: /node_modules/,
-  //           loader: 'babel-loader'
-  //         }
-  //       ]
-  //     },
-  //     resolve: {
-  //       extensions: ['', '.js', '.json']
-  //     },
-  //     externals: {
-  //       zepto: 'Zepto'
-  //     }
-  //   };
-
-  //   // 开启开发者模式，调试sass
-  //   if(config.project.dev) {
-  //     webpackConfig.devtool = 'source-map';
-  //   }
-
-  //   // console.log(paths.ROOT + '/' + paths.JS);
-
-  //   return gulp.src(needPaths)
-  //     .pipe(webpack(webpackConfig))
-  //     .on('error', function(err) {
-  //       gutil.log(gutil.colors.red(err.message));
-  //       this.emit('end', 'webpack 编译错误');
-  //     })
-  //     .pipe(gulp.dest(paths.JS))
-  //     .on('end', function(e) {
-  //       browserSync.reload();
-  //     });
+  }
 };

@@ -8,7 +8,7 @@
 // 获取项目跟目录
 const path = require('path');
 const root = path.resolve(__dirname, '../../');
-module.exports = {
+const CONFIG = {
   // 如果 debug 为true，则开启本地调试模式，默认为false
   "debug": true,
   // 平台 m:移动端，pc:PC端
@@ -34,9 +34,15 @@ module.exports = {
   },
   // 打包配置编译相关配置
   "pack": {
-    "src": ['src/scripts/app/'],
-    "assets": ['assets/js/'],
-    "ext": ['js']
+    "src": {
+      "js":'src/scripts/app/'
+    },
+    "assets": {
+      "js":"assets/js/"
+    },
+    "ext":{
+      "js":['', '.js']
+    }
   },
   // compress压缩js配置
   "compress": {
@@ -76,3 +82,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = CONFIG;
