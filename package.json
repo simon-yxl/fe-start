@@ -43,7 +43,7 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-tinypng-compress": "^1.2.1",
     "gulp-uglify": "^2.1.0",
-    "prompt": "^1.0.0",
+    "inquirer": "^3.0.6",
     "q": "^1.4.1",
     "require-dir": "^0.3.1",
     "webpack-stream": "^3.2.0"

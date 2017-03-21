@@ -30,10 +30,10 @@ module.exports = (browserSync, watchTask, filename) => {
                   gzip: true
                 })));
     gulpQ = gulpQ.then((s) => {
-      if(CONFIG.images.tiny_api_key) {
+      if(CONFIG.imagemin.tiny_api_key) {
         return s.pipe(tinypng({
-          key: CONFIG.images.tiny_api_key,
-          sigFile: CONFIG.images.assets + '/.tinypng-sigs',
+          key: CONFIG.imagemin.tiny_api_key,
+          sigFile: CONFIG.imagemin.assets + '/.tinypng-sigs',
           log: true,
           summarize: true
         }))
@@ -44,7 +44,7 @@ module.exports = (browserSync, watchTask, filename) => {
     var gulpStream = null;
     gulpQ.then((s) => {
       gulpStream = s.on('error', utils.handleError)
-                    .pipe(gulp.dest(CONFIG.images.src))
+                    .pipe(gulp.dest(CONFIG.imagemin.src))
                     .pipe(utils.through())
     })
     .done();

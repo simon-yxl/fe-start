@@ -27,7 +27,8 @@ const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
  * @param {string} filename 文件名
  */
 module.exports = (browserSync, watchTask, filename) => {
-  var enrties = utils.getEntry('pack');
+  var enrties = utils.getEntry('pack', filename);
+  console.log(enrties);
   if (enrties) {
     var webpackConfig = {
       entry: enrties,

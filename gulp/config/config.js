@@ -52,7 +52,7 @@ const CONFIG = {
     "suffix": '.min'
   },
   // 图片编译相关配置
-  "images": {
+  "imagemin": {
     "src": 'src/images/',
     "assets": 'assets/images/',
     "tiny_api_key": 'PX5DcFnxfCnKGyyBpqgJoUUe9ibfbVkI', // 此key码在https://tinypng.com/上注册，免费版每月免费500张

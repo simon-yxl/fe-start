@@ -10,6 +10,8 @@ const browserSync = require('browser-sync').create();
 const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
 const utils = requireDir('./gulp/utils');
+const CONFIG = utils.global.config(); // 获取全局配置文件
+
 /**
  * @method      watch
  * @public
@@ -27,7 +29,7 @@ gulp.task('watch', () => {
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('sass', () => {
-    return utils.handleEnter(taskObj.sass, [browserSync]);
+    return utils.handleEnter(taskObj.sass, CONFIG.sass.src, browserSync);
 });
 
 /**
@@ -48,7 +50,7 @@ gulp.add('prv_sass', () => {
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('compress', () => {
-    return utils.handleEnter(taskObj.compress, [browserSync]);
+    return utils.handleEnter(taskObj.compress, CONFIG.compress.src, browserSync);
 });
 
 /**
@@ -68,7 +70,7 @@ gulp.task('prv_compress', () => {
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('pack', function() {
-  return utils.handleEnter(taskObj.pack, [browserSync]);
+  return utils.handleEnter(taskObj.pack, CONFIG.pack.src.js, browserSync);
 });
 
 /**
@@ -88,7 +90,7 @@ gulp.task('prv_pack', function() {
  * @param {object} browserSync 异步浏览器
  */
 gulp.task('imagemini', () => {
-    return utils.handleEnter(taskObj.imagemini, [browserSync]);
+    return utils.handleEnter(taskObj.imagemini, CONFIG.sass.src, browserSync);
 })
 
 /**
