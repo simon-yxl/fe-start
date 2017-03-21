@@ -8,6 +8,7 @@
 
 const base64 = require('gulp-base64'); // 图片转base64
 const sourcemaps = require('gulp-sourcemaps'); // sourcemaps功能
+const uglify = require('gulp-uglify'); // js压缩
 const CONFIG = require('./global').config(); // 获取全局配置文件
 
 /**
@@ -17,7 +18,7 @@ const CONFIG = require('./global').config(); // 获取全局配置文件
  */
 module.exports = {
   /**
-   * @function
+   * @function base64
    * @param {object} stream gulp流
    */
   'base64': (stream) => {
@@ -32,7 +33,7 @@ module.exports = {
         }))
   },
   /**
-   * @function
+   * @function sourcemaps
    * @param {object} stream gulp流
    * @param {string} sourceRoot 生成sourcemap文件的目录
    */
@@ -42,6 +43,19 @@ module.exports = {
 					includeContent: false,
 					sourceRoot: sourceRoot
 				}))
+  },
+  /**
+   * @function uglify
+   * @param {object} stream gulp流
+   */
+  'uglify': (stream) => {
+    return stream.pipe(uglify({
+					output: {
+						ascii_only: true
+					}, // 将中文转为unicode编码
+					compress: {
+						drop_console: true
+					} // 扔掉console调试语句
+				}));
   }
-  
 }

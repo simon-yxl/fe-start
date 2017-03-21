@@ -1,3 +1,4 @@
+// 由于报错太频繁，严重影响开发速度，所以把相关配置去除了，有兴趣的可以把配置加上
 {
   "extends": "eslint:recommended",
   "parser": "babel-eslint",

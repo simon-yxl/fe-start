@@ -45,7 +45,7 @@
     self.$aside.data('isClose', true);
 
     if (self.$mask.length <= 0) {
-      $.mCfg.$body.append('<div class='mask mask-aside fn-hide'></div>');
+      $.mCfg.$body.append('<div class="mask mask-aside fn-hide"></div>');
       self.$mask = $('.mask-aside');
     }
 

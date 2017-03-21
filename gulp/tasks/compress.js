@@ -8,7 +8,6 @@
 const gulp = require('gulp');
 const Q = require('q'); // promise功能
 const size = require('gulp-size'); // 计算文件大小
-const uglify = require('gulp-uglify'); // js压缩
 const header = require('gulp-header'); //添加文件头信息
 const plumber = require('gulp-plumber'); //添加文件头信息
 const cached = require('gulp-cached'); // 缓存当前任务中的文件，只让已修改的文件通过管道
@@ -16,7 +15,6 @@ const cached = require('gulp-cached'); // 缓存当前任务中的文件，只�
 const rename = require('gulp-rename'); // 文件重命名
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
-const stream = utils.stream;
 const CONFIG = utils.global.config(); // 获取全局配置文件
 const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
 
@@ -42,19 +40,15 @@ module.exports = (browserSync, watchTask, filename) => {
 		// 	})
 		// }
 
-		gulpQ.then((s) => {
+		gulpQ = gulpQ.then((s) => {
 			return s.pipe(plumber({
 					errorHandler: utils.handleError
 				}))
-				.pipe(uglify({
-					output: {
-						ascii_only: true
-					}, // 将中文转为unicode编码
-					compress: {
-						drop_console: true
-					} // 扔掉console调试语句
-				}))
-				.pipe(header(PKG.banner, {
+		}).then((s) => {
+			console.log(s);
+			return utils.stream.uglify(s);
+		}).then((s) => {
+			return s.pipe(header(PKG.banner, {
 					pkg: PKG
 				})) // 添加头部版权
 				.pipe(rename({
