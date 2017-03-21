@@ -38,7 +38,7 @@ module.exports = (task, src, browserSync) => {
       }
     }
 
-    if(platform == 'darwin'){ // 如果是window系统
+    if(platform != 'darwin'){ // 如果是window系统
       return inquirer.prompt([{
         'type':'input',
         'name':'filename',

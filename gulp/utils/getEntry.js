@@ -59,7 +59,6 @@ module.exports = (cSign, filename) => {
       });
       
       if(Object.keys(fileList).length > 0){
-        console.log(fileList);
         return fileList;
       } else {
         gutil.log(gutil.colors.red('没有可打包的文件'));
