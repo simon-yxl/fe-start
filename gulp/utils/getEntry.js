@@ -16,7 +16,7 @@ const CONFIG = require('./global').config(); // 获取全局配置文件
  * @param {string} filename 指定文件名
  */
 module.exports = (cSign, filename) => {
-  const PATH_SRC = CONFIG[cSign].src.js;
+  const PATH_SRC = CONFIG[cSign].src;
   var fileList = {};
   // 输入文件名为空时，获取文件夹下所有文件列表
   var getFileList = (pathdir) => {
@@ -34,6 +34,7 @@ module.exports = (cSign, filename) => {
 
     if(newPaths.length > 0) {
       var levelName = '';
+
       var getList = (dir, level) => {
         const files = fs.readdirSync(dir);
         if(files.length > 0) {
@@ -57,7 +58,7 @@ module.exports = (cSign, filename) => {
       newPaths.forEach((p) => {
         getList(p);
       });
-      
+
       if(Object.keys(fileList).length > 0){
         return fileList;
       } else {
@@ -69,20 +70,21 @@ module.exports = (cSign, filename) => {
       return;
     }
   }
-  const isDirectory = fs.statSync(path.resolve(PATH_SRC, filename));
+
+  const isDirectory = fs.statSync(path.resolve(PATH_SRC, filename)).isDirectory();
   if(!filename || isDirectory){
     return getFileList(isDirectory ? path.resolve(PATH_SRC, filename) : PATH_SRC);
   } else {
-    var needExt = CONFIG[cSign].ext.js;
-    var ext = path.extname(path.resolve(PATH_SRC, filename));
+    const needExt = CONFIG[cSign].ext;
+    const ext = path.extname(path.resolve(PATH_SRC, filename));
     if(needExt.indexOf(ext) >= 0) {
       var fileList = {};
       fileList[path.basename(path.resolve(PATH_SRC, filename), ext)] = path.resolve(CONFIG.root, PATH_SRC, filename);
       return fileList;
     } else {
       // if(ext) {
-        var len = needExt.length;
-        for(var i = 0; i < len; i++){
+        let len = needExt.length;
+        for(let i = 0; i < len; i++){
           if(!needExt[i]) needExt.splice(i, 1);
         }
         gutil.log(gutil.colors.red('Error: 该次打包支持文件格式：'), gutil.colors.green(needExt.join(',')));

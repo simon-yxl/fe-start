@@ -37,16 +37,16 @@ module.exports = (browserSync) => {
 
   // sass文件变更触发自动编译
   gulp.watch(CONFIG.sass.src + '**/*.{'+CONFIG.sass.ext.join(',').toLowerCase()+'}', (event) => {
-    return taskObj.sass(browserSync, event);   
+    return taskObj.sass(browserSync, event);
   });
 
-  // js文件自动压缩
-  // gulp.watch(CONFIG.js.src + '**/*.js', function (event){
-  //   return taskObj.compress(CONFIG, browserSync, event);
-  // });
+  // js文件自动打包
+  gulp.watch(CONFIG.pack.src + '**/*.js', function (event){
+    return taskObj.compress(CONFIG, browserSync, event);
+  });
 
   // 监控图片变化，自动压缩
   // gulp.watch(CONFIG.images.src + '**/*.{'+CONFIG.images.ext.join(',').toLowerCase()+'}', function(event){
-  //   return taskObj.imagemini(CONFIG, browserSync, event);   
+  //   return taskObj.imagemini(CONFIG, browserSync, event);
   // });
 };

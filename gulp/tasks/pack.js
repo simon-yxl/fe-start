@@ -27,8 +27,9 @@ const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
  * @param {string} filename 文件名
  */
 module.exports = (browserSync, watchTask, filename) => {
-  var enrties = utils.getEntry('pack', filename);
-  console.log(enrties);
+  const taskName = 'pack:js';
+  const enrties = utils.getEntry(taskName, filename);
+  const CONFIG_PACK_JS = CONFIG[taskName]
   if (enrties) {
     var webpackConfig = {
       entry: enrties,
@@ -50,7 +51,7 @@ module.exports = (browserSync, watchTask, filename) => {
         ]
       },
       resolve: {
-        extensions: CONFIG.pack.ext.js
+        extensions: CONFIG[taskName].ext
       },
       devtool: CONFIG.debug ? 'cheap-module-source-map' : '',
       externals: {
@@ -59,8 +60,8 @@ module.exports = (browserSync, watchTask, filename) => {
     };
 
     var packStream = () => {
-      var gulpQ = Q(gulp.src(CONFIG.pack.src.js)
-        .pipe(cached('pack'))
+      var gulpQ = Q(gulp.src(CONFIG_PACK_JS.src)
+        .pipe(cached(taskName))
         .pipe(plumber({
           errorHandler: utils.handleError
         }))
@@ -71,13 +72,13 @@ module.exports = (browserSync, watchTask, filename) => {
           return s.pipe(header(PKG.banner, {
               pkg: PKG
             }))
-            .pipe(gulp.dest(CONFIG.pack.assets.js))    
+            .pipe(gulp.dest(CONFIG_PACK_JS.assets))
         }).then((s) => {
           gulpStream = utils.stream.uglify(s)
           .pipe(rename({
             suffix: CONFIG.compress.suffix
           }))
-          .pipe(gulp.dest(CONFIG.pack.assets.js))
+          .pipe(gulp.dest(CONFIG_PACK_JS.assets))
           .pipe(utils.through(function () {
               browserSync.reload();
             }))

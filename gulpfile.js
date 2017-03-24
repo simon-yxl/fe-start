@@ -11,6 +11,12 @@ const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
 const utils = requireDir('./gulp/utils');
 const CONFIG = utils.global.config(); // 获取全局配置文件
+let wocao = 'nimei';
+class file {
+  constructor(filename) {
+    console.log(filename);
+  }
+}
 
 /**
  * @method      watch
@@ -64,13 +70,14 @@ gulp.task('prv_compress', () => {
 });
 
 /**
- * @method      webpack打包
+ * @method      webpack打包js文件
  * @public
  * @description 文件打包
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('pack', function() {
-  return utils.handleEnter(taskObj.pack, CONFIG.pack.src.js, browserSync);
+gulp.task('pack:js', function() {
+  // console.log(CONFIG['pack:js'].src);
+  return utils.handleEnter(taskObj.pack, CONFIG['pack:js'].src, browserSync);
 });
 
 /**
@@ -79,7 +86,7 @@ gulp.task('pack', function() {
  * @description 所有文件打包
  * @param {object} browserSync 异步浏览器
  */
-gulp.task('prv_pack', function() {
+gulp.task('prv_pack:js', function() {
   return taskObj.pack(browserSync);
 });
 

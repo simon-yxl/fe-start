@@ -21,13 +21,14 @@ const readFileList = require('./readFileList'); //获取文件列表
  * @param {object} browserSync 异步浏览器
  */
 module.exports = (task, src, browserSync) => {
+
   if(browserSync){
     // 选择选项后执行任务
     var exeTask = (filename) => {
       if(typeof task == 'function'){
         return task(browserSync, null, filename);
       } else if(task instanceof Array){
-        if(task.length >= 2){ 
+        if(task.length >= 2){
         //多个任务
         } else {
           return task[0](browserSync, null, filename);
@@ -51,6 +52,7 @@ module.exports = (task, src, browserSync) => {
           }
         }
       }]).then((res) => {
+
         exeTask(res.filename);
       });
     } else {
@@ -60,6 +62,7 @@ module.exports = (task, src, browserSync) => {
         'message':'请选择需要编译的文件：',
         'choices': readFileList(src),
         'validate': (filename) => {
+
           if(filename){
             const stats = fs.statSync(path.join(CONFIG.root, src, filename));
             if(stats.isFile()){

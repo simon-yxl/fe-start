@@ -33,16 +33,10 @@ const CONFIG = {
     "suffix": ''
   },
   // 打包配置编译相关配置
-  "pack": {
-    "src": {
-      "js":'src/scripts/app/'
-    },
-    "assets": {
-      "js":"assets/js/"
-    },
-    "ext":{
-      "js":['', '.js']
-    }
+  "pack:js": {
+    "src": 'src/scripts/app/',
+    "assets":"assets/js/",
+    "ext":['', '.js']
   },
   // compress压缩js配置
   "compress": {

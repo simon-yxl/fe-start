@@ -8,6 +8,9 @@
 const fs = require('fs');
 const path = require('path'); //获取路径相关
 
+class files {
+  
+}
 /**
  * @function
  * @param {string} pathdir 路径
