@@ -41,8 +41,8 @@ module.exports = (browserSync) => {
   });
 
   // js文件自动打包
-  gulp.watch(CONFIG.pack.src + '**/*.js', function (event){
-    return taskObj.compress(CONFIG, browserSync, event);
+  gulp.watch(CONFIG['pack:js'].src + '**/*.js', function (event){
+    return taskObj.pack(browserSync, event);
   });
 
   // 监控图片变化，自动压缩

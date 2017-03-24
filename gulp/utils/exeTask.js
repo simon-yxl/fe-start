@@ -18,7 +18,7 @@ const CONFIG = require('./global').config(); // 获取全局配置文件
  * @param {object} watchTask watch任务
  * @param {string} filename 文件名
  */
-module.exports = function (task, taskName, watchTask, filename) {
+module.exports = (task, taskName, watchTask, filename) => {
   const config = CONFIG[taskName];
   if (watchTask) { // 任务处于监控中
     // 文件被修改 or 新增
@@ -37,7 +37,7 @@ module.exports = function (task, taskName, watchTask, filename) {
       });
     }
   } else {
-    var path = config.src + '**/**/';
+    let path = config.src + '**/**/';
     if(filename) {
       path += filename;
     } else {

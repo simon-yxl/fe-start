@@ -17,10 +17,10 @@ const CONFIG = require('./global').config(); // 获取全局配置文件
  */
 module.exports = (cSign, filename) => {
   const PATH_SRC = CONFIG[cSign].src;
-  var fileList = {};
+  let fileList = {};
   // 输入文件名为空时，获取文件夹下所有文件列表
-  var getFileList = (pathdir) => {
-    var newPaths = [];
+  const getFileList = (pathdir) => {
+    let newPaths = [];
     if(pathdir instanceof Array) {
       pathdir.forEach((v) => {
         newPaths.push(path.normalize(v));
@@ -33,9 +33,9 @@ module.exports = (cSign, filename) => {
     }
 
     if(newPaths.length > 0) {
-      var levelName = '';
+      let levelName = '';
 
-      var getList = (dir, level) => {
+      const getList = (dir, level) => {
         const files = fs.readdirSync(dir);
         if(files.length > 0) {
           files.forEach((f) => {
@@ -78,7 +78,7 @@ module.exports = (cSign, filename) => {
     const needExt = CONFIG[cSign].ext;
     const ext = path.extname(path.resolve(PATH_SRC, filename));
     if(needExt.indexOf(ext) >= 0) {
-      var fileList = {};
+      let fileList = {};
       fileList[path.basename(path.resolve(PATH_SRC, filename), ext)] = path.resolve(CONFIG.root, PATH_SRC, filename);
       return fileList;
     } else {

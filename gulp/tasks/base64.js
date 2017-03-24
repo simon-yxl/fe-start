@@ -24,15 +24,15 @@ const CONFIG = utils.global.config(); // 获取全局配置文件
 module.exports = (browserSync, watchTask, filename) => {
 
   // base64转换
-  var toBae64 = (file) => {
-    var gulpQ = Q(gulp.src(file)
+  const toBae64 = (file) => {
+    let gulpQ = Q(gulp.src(file)
       .pipe(cached('base64')));
     // 任务流
     gulpQ = gulpQ.then((s) => {
       return stream.base64(s);
     })
 
-    var gulpStream = null;
+    let gulpStream = null;
     gulpQ.then((s) => {
         gulpStream = s.on('error', utils.handleError)
           .pipe(size({

@@ -14,7 +14,7 @@ const path = require('path');
  */
 module.exports = {
   'config': () => {
-    var CONFIG = global.CONFIG;
+    let CONFIG = global.CONFIG;
     if(!CONFIG) {
       CONFIG = require('../config/config');
       // 路径格式化

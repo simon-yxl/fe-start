@@ -11,12 +11,6 @@ const requireDir = require('require-dir');
 const taskObj = requireDir('./gulp/tasks');
 const utils = requireDir('./gulp/utils');
 const CONFIG = utils.global.config(); // 获取全局配置文件
-let wocao = 'nimei';
-class file {
-  constructor(filename) {
-    console.log(filename);
-  }
-}
 
 /**
  * @method      watch

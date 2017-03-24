@@ -59,15 +59,15 @@ module.exports = (browserSync, watchTask, filename) => {
       }
     };
 
-    var packStream = () => {
-      var gulpQ = Q(gulp.src(CONFIG_PACK_JS.src)
+    const packStream = () => {
+      let gulpQ = Q(gulp.src(CONFIG_PACK_JS.src)
         .pipe(cached(taskName))
         .pipe(plumber({
           errorHandler: utils.handleError
         }))
         .pipe(webpack(webpackConfig)));
 
-      var gulpStream = null
+      let gulpStream = null
       gulpQ = gulpQ.then((s) => {
           return s.pipe(header(PKG.banner, {
               pkg: PKG

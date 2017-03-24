@@ -30,7 +30,7 @@ module.exports = (browserSync, watchTask, filename) => {
 	const compile = (file) => {
 		const cssRoot = path.resolve(CONFIG.sass.src, '../');
 
-		var gulpQ = Q(sass(file, {
+		let gulpQ = Q(sass(file, {
 					sourcemap: CONFIG.debug,
 					trace: true,
 					precision: 6, // sass中计算精度

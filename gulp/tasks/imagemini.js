@@ -22,8 +22,8 @@ const CONFIG = utils.global.config(); // 获取全局配置文件
  * @return {object} gulp流
  */
 module.exports = (browserSync, watchTask, filename) => {
-  var tiny = function (file) {
-    var gulpQ = Q(gulp.src(file)
+  const tiny = function (file) {
+    let gulpQ = Q(gulp.src(file)
                 .pipe(cached('imagemini'))
                 .pipe(size({
                   title: 'imagemini before',
@@ -41,7 +41,7 @@ module.exports = (browserSync, watchTask, filename) => {
         return s.pipe(imagemin());
       }
     })
-    var gulpStream = null;
+    let gulpStream = null;
     gulpQ.then((s) => {
       gulpStream = s.on('error', utils.handleError)
                     .pipe(gulp.dest(CONFIG.imagemin.src))

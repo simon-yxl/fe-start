@@ -12,7 +12,9 @@ const fs    = require('fs');
 const path = require('path'); //获取路径相关
 const gutil = require('gulp-util'); // 打印日志，获取参数变量等
 const platform = process.platform; // 获取当前平台
-const readFileList = require('./readFileList'); //获取文件列表
+
+const FilesClass = require('./FilesClass'); //文件操作类
+const readFileList = new FilesClass().readFileList; //获取文件列表
 
 /**
  * @function
@@ -24,7 +26,7 @@ module.exports = (task, src, browserSync) => {
 
   if(browserSync){
     // 选择选项后执行任务
-    var exeTask = (filename) => {
+    const exeTask = (filename) => {
       if(typeof task == 'function'){
         return task(browserSync, null, filename);
       } else if(task instanceof Array){
@@ -52,7 +54,6 @@ module.exports = (task, src, browserSync) => {
           }
         }
       }]).then((res) => {
-
         exeTask(res.filename);
       });
     } else {
@@ -62,7 +63,6 @@ module.exports = (task, src, browserSync) => {
         'message':'请选择需要编译的文件：',
         'choices': readFileList(src),
         'validate': (filename) => {
-
           if(filename){
             const stats = fs.statSync(path.join(CONFIG.root, src, filename));
             if(stats.isFile()){
@@ -75,6 +75,8 @@ module.exports = (task, src, browserSync) => {
           }
         }
       }]).then((res) => {
+        // console.log(res.filename);
+        // console.log(new FilesClass().readFileList(src));
         exeTask(res.filename);
       });
     }

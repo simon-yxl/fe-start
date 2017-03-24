@@ -27,8 +27,8 @@ const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
 module.exports = (browserSync, watchTask, filename) => {
 
 	// js压缩流
-	var compress = (file) => {
-		var gulpQ = Q(gulp.src([file, '!' + CONFIG.compress.assets + '**/**/*.min.js'])
+	const compress = (file) => {
+		let gulpQ = Q(gulp.src([file, '!' + CONFIG.compress.assets + '**/**/*.min.js'])
 			.pipe(cached('compress')));
 
 		// 如果开发模式
@@ -45,7 +45,6 @@ module.exports = (browserSync, watchTask, filename) => {
 					errorHandler: utils.handleError
 				}))
 		}).then((s) => {
-			console.log(s);
 			return utils.stream.uglify(s);
 		}).then((s) => {
 			return s.pipe(header(PKG.banner, {
@@ -67,7 +66,7 @@ module.exports = (browserSync, watchTask, filename) => {
 		// 	})
 		// }
 
-		var gulpStream = null;
+		let gulpStream = null;
 		gulpQ.then((s) => {
 				gulpStream = s.pipe(gulp.dest(CONFIG.compress.assets))
 					.pipe(utils.through(function () {

@@ -10,7 +10,8 @@ const notify = require("gulp-notify"); // 通知
 /**
  * @function
  */
-module.exports = function(){
+module.exports = function() {
+	// console.log(params);
 	var args = Array.prototype.slice.call(arguments);
 	notify.onError({
 		title: 'Error!',
