@@ -13,8 +13,8 @@ const path = require('path'); //获取路径相关
 const gutil = require('gulp-util'); // 打印日志，获取参数变量等
 const platform = process.platform; // 获取当前平台
 
-const FilesClass = require('./FilesClass'); //文件操作类
-const readFileList = new FilesClass().readFileList; //获取文件列表
+const handleFiles = require('./handleFiles'); //文件操作类
+const readFileList = handleFiles.readFileList; //获取文件列表
 
 /**
  * @function

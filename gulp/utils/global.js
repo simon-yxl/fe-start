@@ -13,7 +13,7 @@ const path = require('path');
  * @return {object}
  */
 module.exports = {
-  'config': () => {
+  config(){
     let CONFIG = global.CONFIG;
     if(!CONFIG) {
       CONFIG = require('../config/config');

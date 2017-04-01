@@ -29,6 +29,7 @@ module.exports = (browserSync, watchTask, filename) => {
                   title: 'imagemini before',
                   gzip: true
                 })));
+
     gulpQ = gulpQ.then((s) => {
       if(CONFIG.imagemin.tiny_api_key) {
         return s.pipe(tinypng({
@@ -41,6 +42,7 @@ module.exports = (browserSync, watchTask, filename) => {
         return s.pipe(imagemin());
       }
     })
+    
     let gulpStream = null;
     gulpQ.then((s) => {
       gulpStream = s.on('error', utils.handleError)

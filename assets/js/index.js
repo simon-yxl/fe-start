@@ -1,7 +1,7 @@
 /*!
  * copyright (c) 2016-2017, yuanxiaolongwan@gmail.com v1.0.0
  * description: 前端工程化项目
- * build time: Fri Mar 24 2017 12:19:04 GMT+0800 (CST)
+ * build time: Sat Apr 01 2017 15:34:54 GMT+0800 (CST)
  */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

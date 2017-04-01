@@ -10,22 +10,11 @@ const path = require('path'); //获取路径相关
 const gutil = require('gulp-util'); // 打印日志，获取参数变量等
 
 /**
- * @class FilesClass
+ * @function readfilelist
+ * @description 读取文件列表
+ * @param {string} pathdir 路径
  */
- class FilesClass {
-  /**
-   * @function constructor
-   * @description 构造函数
-   */
-  constructor () {
-
-  }
-
-  /**
-   * @function readfilelist
-   * @description 读取文件列表
-   * @param {string} pathdir 路径
-   */
+module.exports = {
   readFileList (pathdir) {
     pathdir = path.normalize(pathdir);
     let dirList = [];
@@ -57,6 +46,4 @@ const gutil = require('gulp-util'); // 打印日志，获取参数变量等
     }
     return choicesPath;
   }
-}
-
-module.exports = FilesClass;
+};

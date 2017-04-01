@@ -21,14 +21,14 @@ module.exports = {
    * @function base64
    * @param {object} stream gulp流
    */
-  'base64': (stream) => {
+  base64(stream) {
     // 需要转base64的图片格式
-    const reg = new RegExp("\.("+CONFIG.base64.options.ext.join("|")+")#"+CONFIG.base64.options.suffix, "i"); 
+    const reg = new RegExp("\.("+CONFIG.base64.options.ext.join("|")+")#"+CONFIG.base64.options.suffix, "i");
     return stream.pipe(base64({
           // baseDir: 'assets',
           extensions: [reg],
           exclude:CONFIG.base64.options.exclude,
-          maxImageSize: CONFIG.base64.options.maxImageSize*1024, // bytes 
+          maxImageSize: CONFIG.base64.options.maxImageSize*1024, // bytes
           debug: CONFIG.debug
         }))
   },
@@ -37,18 +37,22 @@ module.exports = {
    * @param {object} stream gulp流
    * @param {string} sourceRoot 生成sourcemap文件的目录
    */
-  'sourcemaps': (stream, sourceRoot) => {
-    return stream.pipe(sourcemaps.write('maps', {
+  sourcemaps(stream, sourceRoot, init){
+    if(init) {
+      return stream.pipe(sourcemaps.init());
+    } else {
+      return stream.pipe(sourcemaps.write('maps', {
 					addComment: CONFIG.debug,
 					includeContent: false,
 					sourceRoot: sourceRoot
 				}))
+    }
   },
   /**
    * @function uglify
    * @param {object} stream gulp流
    */
-  'uglify': (stream) => {
+  uglify(stream){
     return stream.pipe(uglify({
 					output: {
 						ascii_only: true

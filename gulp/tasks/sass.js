@@ -6,7 +6,8 @@
  * -------------------------------
  */
 const gulp = require('gulp'); //gulp
-const sass = require('gulp-ruby-sass'); // sass编译
+const sass = require('gulp-sass'); // sass编译
+const plumber = require('gulp-plumber'); //添加文件头信息
 const autoprefixer = require('gulp-autoprefixer'); // 自动不起css3前缀
 const size = require('gulp-size'); // 计算文件大小
 const header = require('gulp-header'); //添加文件头信息
@@ -30,22 +31,46 @@ module.exports = (browserSync, watchTask, filename) => {
 	const compile = (file) => {
 		const cssRoot = path.resolve(CONFIG.sass.src, '../');
 
-		let gulpQ = Q(sass(file, {
-					sourcemap: CONFIG.debug,
-					trace: true,
-					precision: 6, // sass中计算精度
-					// stopOnError: true,   // 错误是否忽略继续编译
-					style: "compressed", // 压缩css
-					emitCompileError: true, // 编译出错时，允许一个gulp报错
-					loadPath: [cssRoot + '/core', cssRoot + '/module'] //查找文件根目录
-				})
+		let gulpQ = Q(gulp.src(file)
 				.pipe(cached('sass'))
+				.pipe(plumber({
+          errorHandler: utils.handleError
+        }))
+			);
+			// sass(file, {
+			// 		sourcemap: CONFIG.debug,
+			// 		trace: true,
+			// 		precision: 6, // sass中计算精度
+			// 		// stopOnError: true,   // 错误是否忽略继续编译
+			// 		style: "compressed", // 压缩css
+			// 		emitCompileError: true, // 编译出错时，允许一个gulp报错
+			// 		loadPath: [cssRoot + '/core', cssRoot + '/module'] //查找文件根目录
+			// 	})
+
+
+		// 如果开发模式
+		if (CONFIG.debug){
+			gulpQ = gulpQ.then((s) => {
+				return stream.sourcemaps(s, '', true);
+			})
+		}
+
+		gulpQ = gulpQ.then((s) => {
+			return s.pipe(sass(
+					{
+						sourceMap: CONFIG.debug,
+						precision: 6, // sass中计算精度
+						outputStyle: 'compressed',
+						includePaths: [cssRoot + '/core', cssRoot + '/module'] //查找文件根目录
+					}
+				).on('error', sass.logError))
 				.pipe(autoprefixer({
 					browsers: CONFIG.sass.autoprefixer.browsers
 				}))
 				.pipe(header(PKG.banner, {
 					pkg: PKG
-				})))
+				}));
+		})
 
 		// 添加依赖的任务处理，例如 base64
 		const dependent = CONFIG.sass.dependent;
