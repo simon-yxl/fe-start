@@ -11,11 +11,13 @@ const inquirer    = require('inquirer');
 const fs    = require('fs');
 const path = require('path'); //获取路径相关
 const gutil = require('gulp-util'); // 打印日志，获取参数变量等
-// const platform = process.platform; // 获取当前平台
+const platform = process.platform; // 获取当前平台
 
 const handleFiles = require('./handleFiles'); //文件操作类
 const readFileList = handleFiles.readFileList; //获取文件列表
-const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || 'development')); // 获取全局配置文件
+
+require('dotenv').config();
+const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || process.env.GULP_DEV)) // 获取全局配置文件
 
 /**
  * @function
@@ -26,6 +28,30 @@ const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG |
 module.exports = (task, src, browserSync) => {
 
   if(browserSync){
+    const prompt = (type = 'input', name = 'filename', message = '请输入文件名，如果为空则为全部文件：', params = {}) => {
+      const options = {
+        'type':type,
+        'name':name,
+        'message':message,
+        'validate': (filename) => {
+          if(filename){
+            const stats = fs.statSync(path.join(CONFIG.root, src, filename));
+            if(stats.isFile()){
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            return true;
+          }
+        }
+      };
+
+      return inquirer.prompt([Object.assign(options, params)]).then((res) => {
+        exeTask(res.filename);
+      });
+    }
+
     // 选择选项后执行任务
     const exeTask = (filename) => {
       if(typeof task == 'function'){
@@ -43,43 +69,9 @@ module.exports = (task, src, browserSync) => {
     }
 
     if(platform != 'darwin'){ // 如果是window系统
-      return inquirer.prompt([{
-        'type':'input',
-        'name':'filename',
-        'message':'请输入文件名，如果为空则为全部文件：',
-        'validate': (filename) => {
-          if(filename){
-            return !!fs.existsSync(path.join(CONFIG.root, src, filename));
-          } else {
-            return true;
-          }
-        }
-      }]).then((res) => {
-        exeTask(res.filename);
-      });
+      prompt();
     } else {
-      return inquirer.prompt([{
-        'type':'list',
-        'name':'filename',
-        'message':'请选择需要编译的文件：',
-        'choices': readFileList(src),
-        'validate': (filename) => {
-          if(filename){
-            const stats = fs.statSync(path.join(CONFIG.root, src, filename));
-            if(stats.isFile()){
-              return true;
-            } else {
-              return false;
-            }
-          } else {
-            return true;
-          }
-        }
-      }]).then((res) => {
-        // console.log(res.filename);
-        // console.log(new FilesClass().readFileList(src));
-        exeTask(res.filename);
-      });
+      prompt('list', 'filename', '请选择需要编译的文件：', {'choices': readFileList(src)});
     }
   } else {
     gutil.log(gutil.colors.red('Error!'));

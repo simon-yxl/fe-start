@@ -10,7 +10,9 @@ const base64 = require('gulp-base64'); // 图片转base64
 const path = require('path');
 const sourcemaps = require('gulp-sourcemaps'); // sourcemaps功能
 const uglify = require('gulp-uglify'); // js压缩
-const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || 'development')); // 获取全局配置文件
+
+require('dotenv').config();
+const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || process.env.GULP_DEV)) // 获取全局配置文件
 /**
  * @function
  * @param {object} stream gulp流

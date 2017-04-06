@@ -18,7 +18,9 @@ const rename = require('gulp-rename'); // 文件重命名
 const webpack = require('webpack-stream');
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
-const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || 'development')); // 获取全局配置文件
+
+require('dotenv').config();
+const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || process.env.GULP_DEV)); // 获取全局配置文件
 const PKG = require(path.join(CONFIG.root, 'package.json')); // 获取package.json对象
 
 /**
