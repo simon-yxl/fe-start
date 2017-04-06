@@ -13,7 +13,7 @@ const path = require('path'); //获取路径相关
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
 const stream = utils.stream;
-const CONFIG = utils.global.config(); // 获取全局配置文件
+const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || 'development')); // 获取全局配置文件
 
 /**
  * @function

@@ -6,12 +6,10 @@
  * -------------------------------
  */
 const gulp        = require('gulp');
+const path        = require('path');
 const requireDir = require('require-dir');
 const taskObj = requireDir('./');
-const utils = requireDir('../utils');
-const stream = utils.stream;
-const CONFIG = utils.global.config(); // 获取全局配置文件
-
+const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || 'development')); // 获取全局配置文件
 /**
  * @function
  * @param {object} browserSync 异步浏览器控制
@@ -34,13 +32,13 @@ module.exports = (browserSync) => {
   gulp.watch(CONFIG.root + "*.{html,htm}", () => {
     browserSync.reload();
   });
-
-  // sass文件变更触发自动编译
+  //
+  // // sass文件变更触发自动编译
   gulp.watch(CONFIG.sass.src + '**/*.{'+CONFIG.sass.ext.join(',').toLowerCase()+'}', (event) => {
     return taskObj.sass(browserSync, event);
   });
-
-  // js文件自动打包
+  //
+  // // js文件自动打包
   gulp.watch(CONFIG['pack:js'].src + '**/*.js', function (event){
     return taskObj.pack(browserSync, event);
   });

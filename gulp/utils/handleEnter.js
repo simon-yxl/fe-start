@@ -11,10 +11,11 @@ const inquirer    = require('inquirer');
 const fs    = require('fs');
 const path = require('path'); //获取路径相关
 const gutil = require('gulp-util'); // 打印日志，获取参数变量等
-const platform = process.platform; // 获取当前平台
+// const platform = process.platform; // 获取当前平台
 
 const handleFiles = require('./handleFiles'); //文件操作类
 const readFileList = handleFiles.readFileList; //获取文件列表
+const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || 'development')); // 获取全局配置文件
 
 /**
  * @function

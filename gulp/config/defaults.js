@@ -1,14 +1,13 @@
 /**
  * -------------------------------
- * @file        config.js
- * @description 全局参数配置
- * @date        2017-02-21
+ * @file        defaults.js
+ * @description 默认配置文件
+ * @date        2017-04-06
  * -------------------------------
  */
 // 获取项目跟目录
 const path = require('path');
-const root = path.resolve(__dirname, '../../');
-const CONFIG = {
+let CONFIG = {
   // 如果 debug 为true，则开启本地调试模式，默认为false
   "debug": true,
   // 平台 m:移动端，pc:PC端
@@ -20,7 +19,7 @@ const CONFIG = {
     "port": 8658
   },
   // 根目录
-  "root": root + '/',
+  "root": path.resolve(__dirname, '../../'),
   // sass编译相关配置
   "sass": {
     "src": 'src/sass/app/',
@@ -75,6 +74,28 @@ const CONFIG = {
       root: ''
     }
   }
+};
+
+let entries = function* (obj) {
+  // console.log(Object.keys(obj));
+  for (let k of Object.keys(obj)) {
+    yield [k, obj[k]];
+  }
 }
+
+// 路径格式化
+let pathNormalize = (obj) => {
+  for(let [k, v] of entries(obj)){
+    if(v instanceof Object){
+      pathNormalize(v);
+    } else {
+      if(k.indexOf(['src', 'assets', 'baseDir']) >= 0){
+        v = path.normalize(v);
+      }
+    }
+  }
+}
+
+pathNormalize(CONFIG);
 
 module.exports = CONFIG;

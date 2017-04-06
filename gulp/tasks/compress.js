@@ -6,6 +6,7 @@
  * -------------------------------
  */
 const gulp = require('gulp');
+const path = require('path');
 const Q = require('q'); // promise功能
 const size = require('gulp-size'); // 计算文件大小
 const header = require('gulp-header'); //添加文件头信息
@@ -15,8 +16,9 @@ const cached = require('gulp-cached'); // 缓存当前任务中的文件，只�
 const rename = require('gulp-rename'); // 文件重命名
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
-const CONFIG = utils.global.config(); // 获取全局配置文件
-const PKG = require(CONFIG.root + 'package.json'); // 获取package.json对象
+const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || 'development')); // 获取全局配置文件
+// console.log(CONFIG);
+const PKG = require(path.join(CONFIG.root, 'package.json')); // 获取package.json对象
 
 /**
  * @function
