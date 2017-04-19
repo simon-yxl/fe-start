@@ -10,8 +10,8 @@ const path        = require('path');
 const requireDir = require('require-dir');
 const taskObj = requireDir('./');
 
-require('dotenv').config();
-const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || process.env.GULP_DEV)); // 获取全局配置文件
+const CONFIG = require('../config'); // 获取全局配置文件
+
 /**
  * @function
  * @param {object} browserSync 异步浏览器控制

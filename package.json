@@ -5,9 +5,9 @@
   "banner": "/*!\n * copyright (c) 2016-2017, <%= pkg.author %> v<%= pkg.version %>\n * description: <%= pkg.description %>\n * build time: <%= new Date() %>\n */\n",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "export GULP_CONFIG=/gulp/config/development && gulp watch",
-    "prod": "export GULP_CONFIG=/gulp/config/production && gulp watch",
-    "sass": "gulp && gulp sass",
+    "dev": "export GULP_CONFIG=development && gulp watch",
+    "prod": "export GULP_CONFIG=production && gulp watch",
+    "sass": "gulp sass",
     "pack:js": "gulp pack:js",
     "base64": "gulp base64",
     "imagemini": "gulp imagemini",

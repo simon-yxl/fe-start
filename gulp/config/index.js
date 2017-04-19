@@ -7,6 +7,7 @@
  */
 // 获取项目跟目录
 const path = require('path');
+require('dotenv').config();
 let CONFIG = {
   // 如果 debug 为true，则开启本地调试模式，默认为false
   "debug": true,
@@ -98,4 +99,6 @@ let pathNormalize = (obj) => {
 
 pathNormalize(CONFIG);
 
-module.exports = CONFIG;
+const other = require(process.env.GULP_CONFIG || process.env.GULP_DEV); 
+
+module.exports = Object.assign(CONFIG, other);

@@ -8,8 +8,7 @@
 const path = require('path');
 const fs = require('fs');
 const gutil = require('gulp-util'); // 打印日志，获取参数变量等
-require('dotenv').config();
-const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || process.env.GULP_DEV)); // 获取全局配置文件
+const CONFIG = require('../config'); // 获取全局配置文件
 
 /**
  * @function

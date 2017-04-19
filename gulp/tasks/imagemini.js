@@ -15,8 +15,7 @@ const cached = require('gulp-cached'); // 缓存当前任务中的文件，只�
 const requireDir = require('require-dir');
 const utils = requireDir('../utils');
 
-require('dotenv').config();
-const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || process.env.GULP_DEV)) // 获取全局配置文件
+const CONFIG = require('../config'); // 获取全局配置文件
 
 /**
  * @function

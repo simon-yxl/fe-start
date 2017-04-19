@@ -16,8 +16,7 @@ const platform = process.platform; // 获取当前平台
 const handleFiles = require('./handleFiles'); //文件操作类
 const readFileList = handleFiles.readFileList; //获取文件列表
 
-require('dotenv').config();
-const CONFIG = require(path.join(process.env.INIT_CWD, process.env.GULP_CONFIG || process.env.GULP_DEV)) // 获取全局配置文件
+const CONFIG = require('../config'); // 获取全局配置文件
 
 /**
  * @function
